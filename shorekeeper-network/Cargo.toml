@@ -1,0 +1,11 @@
+[package]
+name = "shorekeeper-network"
+edition = "2021"
+version.workspace = true
+
+[dependencies]
+tokio.workspace = true
+serde.workspace = true
+zeromq.workspace = true
+byteorder.workspace = true
+shorekeeper-protocol.workspace = true

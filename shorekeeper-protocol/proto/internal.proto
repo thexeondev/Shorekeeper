@@ -1,0 +1,42 @@
+syntax = "proto3";
+package internal;
+
+// MessageId: 1000 (Request)
+message CreatePlayerDataRequest {
+	uint32 session_id = 1;
+	string user_id = 2;
+	int32 sex = 3;
+	string name = 4;
+}
+
+// MessageId: 1001 (Response)
+message CreatePlayerDataResponse {
+	int32 code = 1;
+	uint32 session_id = 2;
+	int32 player_id = 3;
+	string name = 4;
+	int32 sex = 5;
+}
+
+// MessageId: 1002 (Request)
+message StartPlayerSessionRequest {
+	int32 player_id = 1;
+	uint32 gateway_session_id = 2;
+}
+
+// MessageId: 1003 (Response)
+message StartPlayerSessionResponse {
+	int32 code = 1;
+	uint32 gateway_session_id = 2;
+}
+
+// MessageId: 1004 (Push)
+message ForwardClientMessagePush {
+	uint32 gateway_session_id = 1;
+	bytes data = 2;
+}
+
+// MessageId: 1005 (Push)
+message StopPlayerSessionPush {
+	uint32 gateway_session_id = 1;
+}

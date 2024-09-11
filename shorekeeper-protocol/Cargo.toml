@@ -1,0 +1,15 @@
+[package]
+name = "shorekeeper-protocol"
+edition = "2021"
+version.workspace = true
+
+[dependencies]
+byteorder.workspace = true
+crc32fast.workspace = true
+thiserror.workspace = true
+prost.workspace = true
+shorekeeper-protocol-derive.workspace = true
+
+[build-dependencies]
+prost-build.workspace = true
+quote = "1.0.35"

@@ -1,0 +1,23 @@
+[package]
+name = "shorekeeper-http"
+edition = "2021"
+version.workspace = true
+
+[dependencies]
+# Framework
+axum.workspace = true
+axum-server.workspace = true
+
+# Cryptography
+aes.workspace = true
+cbc.workspace = true
+
+# Serialization
+serde.workspace = true
+
+# Util
+rbase64.workspace = true
+thiserror.workspace = true
+
+# Tracing
+tracing.workspace = true

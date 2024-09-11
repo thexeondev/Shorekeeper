@@ -1,0 +1,20 @@
+service_id = 1
+
+[network]
+kcp_port = 7777
+
+[protokey]
+builtin_encryption_msg_id = [111, 112]
+use_client_key = true
+
+[service_end_point]
+addr = "tcp://127.0.0.1:10003"
+
+[game_server_end_point]
+addr = "tcp://127.0.0.1:10004"
+
+[database]
+host = "localhost:5432"
+user_name = "postgres"
+password = ""
+db_name = "shorekeeper"

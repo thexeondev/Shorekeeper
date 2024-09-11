@@ -1,0 +1,31 @@
+[package]
+name = "gateway-server"
+edition = "2021"
+version.workspace = true
+
+[dependencies]
+# Framework
+tokio.workspace = true
+
+# Networking
+kcp = { workspace = true, features = ["tokio"] }
+
+# Serialization
+serde.workspace = true
+
+# Tracing
+tracing.workspace = true
+
+# Util
+anyhow.workspace = true
+thiserror.workspace = true
+paste.workspace = true
+dashmap.workspace = true
+hex.workspace = true
+
+# Internal
+common.workspace = true
+shorekeeper-database.workspace = true
+shorekeeper-network.workspace = true
+shorekeeper-protocol.workspace = true
+shorekeeper-protokey.workspace = true

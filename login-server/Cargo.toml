@@ -1,0 +1,22 @@
+[package]
+name = "login-server"
+edition = "2021"
+version.workspace = true
+
+[dependencies]
+# Framework
+tokio.workspace = true
+shorekeeper-http.workspace = true
+shorekeeper-database.workspace = true
+
+# Serialization
+serde.workspace = true
+
+# Util
+anyhow.workspace = true
+
+# Tracing
+tracing.workspace = true
+
+# Internal
+common.workspace = true

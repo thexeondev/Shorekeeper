@@ -1,0 +1,22 @@
+[package]
+name = "hotpatch-server"
+edition = "2021"
+version.workspace = true
+
+[dependencies]
+# Framework
+tokio.workspace = true
+shorekeeper-http.workspace = true
+
+# Serialization
+serde.workspace = true
+toml.workspace = true
+
+# Util
+anyhow.workspace = true
+
+# Tracing
+tracing.workspace = true
+
+# Internal
+common.workspace = true

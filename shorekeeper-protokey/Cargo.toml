@@ -1,0 +1,21 @@
+[package]
+name = "shorekeeper-protokey"
+edition = "2021"
+version.workspace = true
+
+[dependencies]
+# Cryptography
+aes.workspace = true
+cipher = { workspace = true, features = ["block-padding", "alloc"]}
+rsa.workspace = true
+rand.workspace = true
+
+# Serialization
+serde.workspace = true
+
+# Util
+rbase64.workspace = true
+thiserror.workspace = true
+
+# Tracing
+tracing.workspace = true

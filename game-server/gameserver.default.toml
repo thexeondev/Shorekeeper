@@ -1,0 +1,13 @@
+service_id = 2
+
+[database]
+host = "localhost:5432"
+user_name = "postgres"
+password = ""
+db_name = "shorekeeper"
+
+[service_end_point]
+addr = "tcp://127.0.0.1:10004"
+
+[gateway_end_point]
+addr = "tcp://127.0.0.1:10003"

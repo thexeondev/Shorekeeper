@@ -1,0 +1,7 @@
+/target
+/hotpatch.toml
+/configserver.toml
+/loginserver.toml
+/gateway.toml
+/gameserver.toml
+/shorekeeper-protocol/generated

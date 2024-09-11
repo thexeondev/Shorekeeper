@@ -1,0 +1,74 @@
+syntax = "proto3";
+package data;
+
+message VectorData {
+	float x = 1;
+	float y = 2;
+	float z = 3;
+}
+
+message TransformData {
+	VectorData position = 1;
+	VectorData rotation = 2;
+}
+
+message PlayerBasicData {
+	int32 id = 1;
+	string name = 2;
+	int32 sex = 3;
+	int32 level = 4;
+	int32 exp = 5;
+	int32 head_photo = 6;
+	int32 head_frame = 7;
+}
+
+message RoleSkillNodeData {
+	int32 node_id = 1;
+	bool is_active = 2;
+	int32 skill_id = 3;
+}
+
+message RoleData {
+	int32 role_id = 1;
+	string name = 2;
+	int32 level = 3;
+	int32 exp = 4;
+	int32 breakthrough = 5;
+	map<int32, int32> skill_map = 6;
+	map<int32, int32> phantom_map = 7;
+	int32 star = 8;
+	int32 favor = 9;
+	uint32 create_time = 10;
+	int32 cur_model = 11;
+	repeated int32 models = 12;
+	repeated RoleSkillNodeData skill_node_state = 13;
+	int32 resonant_chain_group_index = 14;
+}
+
+message RoleFormationData {
+	int32 formation_id = 1;
+	int32 cur_role = 2;
+	repeated int32 role_id_list = 3;
+	bool is_current = 4;
+}
+
+message PlayerRoleData {
+	repeated RoleData role_list = 1;
+	repeated RoleFormationData role_formation_list = 2;
+}
+
+message PlayerLocationData {
+	int32 instance_id = 1;
+	TransformData position = 2;
+}
+
+message PlayerFuncData {
+	map<int32, int32> func_map = 1;
+}
+
+message PlayerSaveData {
+	PlayerBasicData basic_data = 1;
+	PlayerRoleData role_data = 2;
+	PlayerLocationData location_data = 3;
+	PlayerFuncData func_data = 4;
+}

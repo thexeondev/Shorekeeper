@@ -1,0 +1,61 @@
+[workspace]
+members = ["common", "config-server", "hotpatch-server", "login-server", "gateway-server", "gateway-server/kcp", "shorekeeper-database", "shorekeeper-http", "shorekeeper-protokey", "shorekeeper-protocol", "shorekeeper-protocol/shorekeeper-protocol-derive", "game-server", "shorekeeper-network", "shorekeeper-data"]
+resolver = "2"
+
+[workspace.package]
+version = "0.1.0"
+
+[workspace.dependencies]
+# Framework
+tokio = { version = "1.39.3", features = ["full"] }
+axum = "0.7.5"
+axum-server = "0.7.1"
+zeromq = { version = "0.4.0", default-features = false, features = ["tokio-runtime", "tcp-transport"] }
+
+# Database
+sqlx = { version = "0.8.2", features = ["postgres", "runtime-tokio-rustls"] }
+
+# Cryptography
+aes = "0.8.4"
+cbc = { version = "0.1.2", features = ["alloc"] }
+cipher = "0.4.4"
+rand = "0.8.5"
+rsa = { version = "0.9.6", features = ["pem"] }
+
+# Serialization
+serde = { version = "1.0.209", features = ["derive"] }
+serde_json = "1.0.128"
+toml = "0.8.19"
+prost = "0.13.2"
+prost-build = "0.13.2"
+
+# Utility
+anyhow = "1.0.86"
+thiserror = "1.0.63"
+paste = "1.0.15"
+rbase64 = "2.0.3"
+dashmap = "6.1.0"
+hex = "0.4.3"
+byteorder = "1.5.0"
+crc32fast = "1.4.2"
+
+# Tracing
+tracing = "0.1.40"
+tracing-subscriber = "0.3.18"
+
+# Internal
+kcp = { path = "gateway-server/kcp" }
+common = { path = "common/" }
+shorekeeper-http = { path = "shorekeeper-http/" }
+shorekeeper-data = { path = "shorekeeper-data/" }
+shorekeeper-database = { path = "shorekeeper-database/" }
+shorekeeper-network = { path = "shorekeeper-network/" }
+shorekeeper-protocol = { path = "shorekeeper-protocol/" }
+shorekeeper-protocol-derive = { path = "shorekeeper-protocol/shorekeeper-protocol-derive" }
+shorekeeper-protokey = { path = "shorekeeper-protokey/" }
+
+[profile.release]
+strip = true      # Automatically strip symbols from the binary.
+lto = true        # Link-time optimization.
+opt-level = 3     # Optimize for speed.
+codegen-units = 1 # Maximum size reduction optimizations.

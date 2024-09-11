@@ -1,0 +1,12 @@
+[network]
+http_addr = "0.0.0.0:5500"
+
+[gateway]
+host = "127.0.0.1"
+port = 7777
+
+[database]
+host = "localhost:5432"
+user_name = "postgres"
+password = ""
+db_name = "shorekeeper"

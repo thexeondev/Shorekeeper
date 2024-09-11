@@ -1,0 +1,12 @@
+[package]
+name = "shorekeeper-protocol-derive"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+syn = "2.0.53"
+quote = "1.0.35"
+proc-macro2 = "1.0.79"
+
+[lib]
+proc-macro = true
