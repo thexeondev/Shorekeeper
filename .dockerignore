@@ -1,0 +1,12 @@
+.git
+assets
+postgres
+**/target
+.gitignore
+docker-compose.yml
+Dockerfile-builder
+Dockerfile-service
+LICENSE
+*.md
+*.zip
+*.png

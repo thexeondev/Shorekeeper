@@ -1,0 +1,6 @@
+[network]
+http_addr = "0.0.0.0:10002"
+
+[encryption]
+key = "t+AEu5SGdpz06tomonajLMau9AJgmyTvVhz9VtGf1+0="
+iv = "fprc5lBWADQB7tim0R2JxQ=="

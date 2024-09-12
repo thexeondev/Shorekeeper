@@ -1,0 +1,6 @@
+FROM alpine:3.20 as release
+ARG MICROSERVICE
+
+WORKDIR /app
+COPY --from=shorekeeper-builder:1.3.0-SNAPSHOT /app/target/release/$MICROSERVICE ./service
+CMD ["./service"]

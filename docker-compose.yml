@@ -1,0 +1,73 @@
+name: shorekeeper-ps
+
+services:
+  shorekeeper-config-server:
+    image: shorekeeper-config-server:1.3.0-SNAPSHOT
+    depends_on:
+      shorekeeper-postgres:
+        condition: service_healthy
+    ports:
+      - '10001:10001'
+    volumes:
+      - "./docker/configserver.toml:/app/configserver.toml"
+      - "./assets/config:/app/assets/config"
+  shorekeeper-hotpatch-server:
+    image: shorekeeper-hotpatch-server:1.3.0-SNAPSHOT
+    depends_on:
+      shorekeeper-postgres:
+        condition: service_healthy
+    ports:
+      - '10002:10002'
+    volumes:
+      - "./docker/hotpatch.toml:/app/hotpatch.toml"
+      - "./assets/hotpatch:/app/assets/hotpatch"
+  shorekeeper-login-server:
+    image: shorekeeper-login-server:1.3.0-SNAPSHOT
+    depends_on:
+      shorekeeper-postgres:
+        condition: service_healthy
+    ports:
+      - '5500:5500'
+    volumes:
+      - "./docker/loginserver.toml:/app/loginserver.toml"
+  shorekeeper-gateway-server:
+    image: shorekeeper-gateway-server:1.3.0-SNAPSHOT
+    depends_on:
+      shorekeeper-postgres:
+        condition: service_healthy
+    ports:
+      # Uncomment this if you want to have manual access
+      #      - '10003:10003'
+      - '7777:7777/udp'
+    volumes:
+      - "./docker/gateway.toml:/app/gateway.toml"
+  shorekeeper-game-server:
+    image: shorekeeper-game-server:1.3.0-SNAPSHOT
+    depends_on:
+      shorekeeper-postgres:
+        condition: service_healthy
+    # Uncomment this if you want to have manual access
+#    ports:
+#      - '10004:10004'
+    volumes:
+      - "./docker/gameserver.toml:/app/gameserver.toml"
+      - "./assets/logic:/app/assets/logic"
+  shorekeeper-postgres:
+    image: postgres:16.4-alpine3.20
+    user: postgres
+    # Uncomment this if you want to have manual access
+#    ports:
+#      - '5432:5432'
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    environment:
+      - "POSTGRES_PASSWORD=toor"
+    volumes:
+      - "./docker/postgres/scripts:/docker-entrypoint-initdb.d"
+      - shorekeeper-postgres-vol:/var/lib/postgresql/data
+volumes:
+  shorekeeper-postgres-vol:
+    external: true

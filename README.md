@@ -24,7 +24,22 @@ cargo run --bin gateway-server
 cargo run --bin game-server
 ```
 
-##### b) using pre-built binaries
+##### b) building from sources(docker edition)
+If you are to wheelchair'd for option A, you can fallback to option b.
+In this case you will need [Docker Desktop](https://www.docker.com/products/docker-desktop/)
+
+Once installed, to build the images, run:
+```sh
+# or builder.bat if you run it on windows
+./builder.sh
+```
+
+And to run the containers:
+```sh
+docker compose up -d
+```
+
+##### c) using pre-built binaries
 Navigate to the [Releases](https://git.xeondev.com/Shorekeeper/Shorekeeper/releases)
 page and download the latest release for your platform.<br>
 Launch all servers: `config-server`, `hotpatch-server`, `login-server`, `gateway-server`, `game-server`
