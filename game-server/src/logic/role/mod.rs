@@ -1,12 +1,11 @@
 use std::collections::HashMap;
 
 use common::time_util;
+pub use formation::RoleFormation;
 use shorekeeper_data::role_info_data;
 use shorekeeper_protocol::{ArrayIntInt, RoleData, RoleInfo};
 
 mod formation;
-pub use formation::RoleFormation;
-
 pub struct Role {
     pub role_id: i32,
     pub name: String,
@@ -17,14 +16,19 @@ pub struct Role {
     pub star: i32,
     pub favor: i32,
     pub create_time: u32,
+    pub equip_weapon: i32,
 }
 
 impl Role {
     pub const MAIN_CHARACTER_MALE_ID: i32 = 1501;
     pub const MAIN_CHARACTER_FEMALE_ID: i32 = 1502;
 
-    pub fn new(role_id: i32) -> Self {
+    pub fn new(role_id: i32, weapon_id: Option<i32>) -> Self {
         let data = role_info_data::iter().find(|d| d.id == role_id).unwrap();
+        let equip_weapon = match weapon_id {
+            None => data.init_weapon_item_id,
+            Some(x) => x,
+        };
 
         Self {
             role_id,
@@ -36,6 +40,7 @@ impl Role {
             star: 0,
             favor: 0,
             create_time: time_util::unix_timestamp() as u32,
+            equip_weapon,
         }
     }
 
@@ -69,6 +74,7 @@ impl Role {
             star: data.star,
             favor: data.favor,
             create_time: data.create_time,
+            equip_weapon: data.equip_weapon,
         }
     }
 
@@ -83,6 +89,7 @@ impl Role {
             star: self.star,
             favor: self.favor,
             create_time: self.create_time,
+            equip_weapon: self.equip_weapon,
             ..Default::default()
         }
     }

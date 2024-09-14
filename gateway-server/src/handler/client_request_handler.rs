@@ -140,7 +140,7 @@ async fn on_login_request(
 
     session.player_id = Some(player_id);
     response.code = ErrorCode::Success.into();
-    response.timestamp = time_util::unix_timestamp() as i64;
+    response.timestamp = time_util::unix_timestamp_ms() as i64;
 
     tracing::info!(
         "login success, user_id: {}, player_id: {}",

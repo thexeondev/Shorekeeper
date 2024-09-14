@@ -59,6 +59,6 @@ macro_rules! query_components {
                 }),
             )*)
         })
-        .unwrap_or_else(|| ($( crate::ident_as_none!($comp), )*))
+        .unwrap_or_else(|| ($( $crate::ident_as_none!($comp), )*))
     };
 }

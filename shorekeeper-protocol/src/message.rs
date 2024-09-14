@@ -92,7 +92,7 @@ impl Message {
         let recv_crc = r.read_u32::<LE>()?;
 
         let mut payload = vec![0u8; src.len() - r.position() as usize].into_boxed_slice();
-        r.read(&mut payload)?;
+        let _ = r.read(&mut payload)?;
 
         let calc_crc = crc32fast::hash(&payload);
 

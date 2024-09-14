@@ -30,6 +30,7 @@ impl_component_container! {
     Attribute;
     PlayerEntityMarker;
     Movement;
+    Weapon;
 }
 
 pub trait Component {

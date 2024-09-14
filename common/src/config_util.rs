@@ -4,7 +4,7 @@ pub trait TomlConfig: DeserializeOwned {
     const DEFAULT_TOML: &str;
 }
 
-pub fn load_or_create<'a, C>(path: &str) -> C
+pub fn load_or_create<C>(path: &str) -> C
 where
     C: DeserializeOwned + TomlConfig,
 {

@@ -187,6 +187,6 @@ fn encrypt_aes256_ecb_pkcs7(
 ) -> Result<Box<[u8]>, InvalidLength> {
     let cipher = Aes256::new_from_slice(session_key)?;
     Ok(cipher
-        .encrypt_padded_vec::<Pkcs7>(&data[..])
+        .encrypt_padded_vec::<Pkcs7>(data)
         .into_boxed_slice())
 }

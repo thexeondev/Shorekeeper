@@ -26,10 +26,7 @@ macro_rules! impl_from_data {
 
 impl Component for Attribute {
     fn set_pb_data(&self, pb: &mut shorekeeper_protocol::EntityPb) {
-        pb.living_status = self
-            .is_alive()
-            .then_some(LivingStatus::Alive)
-            .unwrap_or(LivingStatus::Dead)
+        pb.living_status = (if self.is_alive() { LivingStatus::Alive } else { LivingStatus::Dead })
             .into();
 
         pb.component_pbs.push(EntityComponentPb {

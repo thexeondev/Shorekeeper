@@ -11,13 +11,10 @@ pub async fn handle_login_api_call(
     tracing::debug!("login requested");
 
     let user_data = parameters.user_data;
-    let result = match login(&state, parameters).await {
-        Ok(result) => result,
-        Err(err) => {
-            tracing::warn!("login: internal error occurred {err:?}");
-            schema::LoginResult::error(-1, String::from("Internal server error"))
-        }
-    };
+    let result = login(&state, parameters).await.unwrap_or_else(|err| {
+        tracing::warn!("login: internal error occurred {err:?}");
+        schema::LoginResult::error(-1, String::from("Internal server error"))
+    });
 
     Json(result.with_user_data(user_data))
 }
@@ -32,7 +29,7 @@ async fn login(state: &ServiceState, params: schema::LoginParameters) -> Result<
         Some(account) => { 
             if let Some(ban_time_stamp) = account.ban_time_stamp {
                 if time_util::unix_timestamp() < ban_time_stamp as u64 {
-                    return Ok(schema::LoginResult::banned(String::from("You're banned MF"), ban_time_stamp as i64));
+                    return Ok(schema::LoginResult::banned(String::from("You're banned MF"), ban_time_stamp));
                 }
             }
 

@@ -155,11 +155,11 @@ impl Session {
 
     fn next_message(&mut self) -> Option<Message> {
         self.decoder.pop_with(|buf| {
-            Message::decode(&buf)
+            Message::decode(buf)
                 .inspect_err(|err| {
                     tracing::error!(
                         "failed to decode a message, err: {err}, buf: {}",
-                        hex::encode(&buf)
+                        hex::encode(buf)
                     )
                 })
                 .ok()

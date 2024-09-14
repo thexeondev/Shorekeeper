@@ -43,7 +43,7 @@ impl Player {
         // we need shorekeeper
         // TODO: remove this part after implementing team switch
         if !self.role_list.iter().any(|r| r.role_id == 1505) {
-            self.role_list.push(Role::new(1505));
+            self.role_list.push(Role::new(1505, Some(21050036)));
         }
 
         self.formation_list.clear();
@@ -126,8 +126,7 @@ impl Player {
             .unwrap()
             .role_id_set
             .iter()
-            .map(|id| self.role_list.iter().find(|r| r.role_id == *id))
-            .flatten()
+            .flat_map(|id| self.role_list.iter().find(|r| r.role_id == *id))
             .collect()
     }
 
@@ -217,8 +216,8 @@ impl Player {
 
     fn create_main_character_role(name: String, sex: i32) -> Role {
         let mut role = match sex {
-            0 => Role::new(Role::MAIN_CHARACTER_FEMALE_ID),
-            1 => Role::new(Role::MAIN_CHARACTER_MALE_ID),
+            0 => Role::new(Role::MAIN_CHARACTER_FEMALE_ID, None),
+            1 => Role::new(Role::MAIN_CHARACTER_MALE_ID, None),
             _ => unreachable!(),
         };
 

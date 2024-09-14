@@ -43,6 +43,7 @@ message RoleData {
 	repeated int32 models = 12;
 	repeated RoleSkillNodeData skill_node_state = 13;
 	int32 resonant_chain_group_index = 14;
+	int32 equip_weapon = 15;
 }
 
 message RoleFormationData {

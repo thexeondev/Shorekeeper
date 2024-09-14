@@ -11,8 +11,9 @@ use std::{
 };
 
 use common::time_util;
-use shorekeeper_protocol::{message::Message, JoinSceneNotify, TransitionOptionPb};
-use shorekeeper_protocol::{AfterJoinSceneNotify, EnterGameResponse, PlayerSaveData};
+use shorekeeper_protocol::{message::Message, JoinSceneNotify, TransitionOptionPb,
+                           AfterJoinSceneNotify, EnterGameResponse, JsPatchNotify};
+use shorekeeper_protocol::{PlayerSaveData};
 
 use crate::{
     player_save_task::{self, PlayerSaveReason},
@@ -20,6 +21,9 @@ use crate::{
 };
 
 use super::{ecs::world::World, player::Player, utils::world_util};
+
+const WATER_MASK: &str = include_str!("../../watermask.js");
+const UID_FIX: &str = include_str!("../../uidfix.js");
 
 pub enum LogicInput {
     AddPlayer {
@@ -105,8 +109,7 @@ fn logic_thread_func(receiver: mpsc::Receiver<LogicInput>, load: Arc<AtomicUsize
             let mut world = world.borrow_mut();
             let mut players = world
                 .player_ids()
-                .map(|id| state.players.get(id).map(|pl| pl.borrow_mut()))
-                .flatten()
+                .flat_map(|id| state.players.get(id).map(|pl| pl.borrow_mut()))
                 .collect::<Box<_>>();
 
             super::systems::tick_systems(&mut world, &mut players);
@@ -163,6 +166,14 @@ fn handle_logic_input(state: &mut LogicState, input: LogicInput) {
                 max_entity_id: i64::MAX,
                 scene_info: Some(scene_info),
                 transition_option: Some(TransitionOptionPb::default()),
+            });
+            player.notify(JsPatchNotify {
+                content: WATER_MASK.to_string(),
+            });
+            player.notify(JsPatchNotify {
+                content: UID_FIX
+                    .replace("{PLAYER_USERNAME}", &player.basic_info.name)
+                    .replace("{SELECTED_COLOR}", "50FC71"),
             });
 
             player.respond(EnterGameResponse::default(), enter_rpc_id);

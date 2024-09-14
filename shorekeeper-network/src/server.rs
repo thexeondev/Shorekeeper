@@ -28,8 +28,7 @@ impl ServiceListener {
             for message in data
                 .into_vec()
                 .into_iter()
-                .map(|b| ServiceMessage::decode(b.as_ref()))
-                .flatten()
+                .flat_map(|b| ServiceMessage::decode(b.as_ref()))
             {
                 let _ = sender.send(message).await;
             }

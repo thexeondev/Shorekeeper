@@ -2,6 +2,7 @@ use shorekeeper_protocol::{
     EntityActiveRequest, EntityActiveResponse, EntityOnLandedRequest, EntityOnLandedResponse,
     ErrorCode, MovePackagePush, UpdateSceneDateRequest, UpdateSceneDateResponse,
 };
+use shorekeeper_protocol::combat_message::{CombatSendPackRequest, CombatSendPackResponse};
 
 use crate::{logic::ecs::component::ComponentContainer, logic::player::Player, query_components};
 
@@ -9,6 +10,14 @@ pub fn on_update_scene_date_request(
     _player: &Player,
     _request: UpdateSceneDateRequest,
     response: &mut UpdateSceneDateResponse,
+) {
+    response.error_code = ErrorCode::Success.into();
+}
+
+pub fn on_combat_message_combat_send_pack_request(
+    _player: &Player,
+    _request: CombatSendPackRequest,
+    response: &mut CombatSendPackResponse,
 ) {
     response.error_code = ErrorCode::Success.into();
 }

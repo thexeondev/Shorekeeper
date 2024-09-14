@@ -11,8 +11,7 @@ pub fn build_scene_add_on_init_data(world: &World) -> PlayerSceneAoiData {
 
     let mut aoi_data = PlayerSceneAoiData::default();
     for entity in entities {
-        let mut pb = EntityPb::default();
-        pb.id = entity.into();
+        let mut pb = EntityPb { id: entity.into(), ..Default::default() };
 
         world
             .get_entity_components(entity)

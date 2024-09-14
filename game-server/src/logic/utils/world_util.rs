@@ -8,14 +8,13 @@ use crate::{
     logic::{
         components::{
             Attribute, EntityConfig, Movement, OwnerPlayer, PlayerEntityMarker, Position,
-            Visibility,
+            Visibility, Weapon
         },
         ecs::{component::ComponentContainer, world::World},
         player::Player,
     },
     query_with,
 };
-
 use super::entity_serializer;
 
 pub fn add_player_entities(world: &mut World, player: &Player) {
@@ -44,6 +43,10 @@ pub fn add_player_entities(world: &mut World, player: &Player) {
                     .unwrap(),
             )))
             .with(ComponentContainer::Movement(Movement::default()))
+            .with(ComponentContainer::Weapon(Weapon {
+                weapon_id: role.equip_weapon,
+                weapon_breach_level: 0, // TODO: store this too
+            }))
             .build();
 
         tracing::debug!(

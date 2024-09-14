@@ -64,7 +64,7 @@ impl UdpServer {
             conv_id,
             addr,
             self.socket.clone(),
-            &self.protokey_helper,
+            self.protokey_helper,
             self.db.clone(),
         );
         self.session_mgr.add(conv_id, session);

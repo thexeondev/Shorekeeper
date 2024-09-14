@@ -15,7 +15,7 @@ impl ServiceMessage {
         w.write_u16::<LE>(self.rpc_id)?;
         w.write_u16::<LE>(self.message_id)?;
         w.write_u32::<LE>(self.data.len() as u32)?;
-        w.write(&self.data)?;
+        w.write_all(&self.data)?;
 
         Ok(())
     }

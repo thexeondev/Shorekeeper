@@ -24,7 +24,7 @@ impl World {
 
     pub fn create_entity(&mut self) -> EntityBuilder {
         let entity = self.entity_manager.create();
-        EntityBuilder::builder(entity, self.components.entry(entity).or_insert(Vec::new()))
+        EntityBuilder::builder(entity, self.components.entry(entity).or_default())
     }
 
     pub fn is_in_world(&self, entity_id: i64) -> bool {

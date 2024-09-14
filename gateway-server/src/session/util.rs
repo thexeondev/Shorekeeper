@@ -15,8 +15,7 @@ impl LengthFieldBasedDecoder {
 
     pub fn input(&mut self, data: &[u8]) {
         self.ensure_capacity(data.len());
-
-        (&mut self.buffer[self.cur_index..self.cur_index + data.len()]).copy_from_slice(data);
+        self.buffer[self.cur_index..self.cur_index + data.len()].copy_from_slice(data);
         self.cur_index += data.len();
     }
 

@@ -15,7 +15,7 @@ pub fn main() {
     let config_path = Path::new("proto/config.csv");
     if config_path.exists() {
         println!("cargo:rerun-if-changed={config_file}");
-        impl_proto_config(config_path, &Path::new("generated/proto_config.rs")).unwrap();
+        impl_proto_config(config_path, Path::new("generated/proto_config.rs")).unwrap();
     }
 
     let proto_file = "proto/shorekeeper.proto";

@@ -24,6 +24,12 @@ pub struct Application<S> {
 
 impl Application<()> {
     pub fn new() -> Self {
+        Default::default()
+    }
+}
+
+impl Default for Application<()> {
+    fn default() -> Self {
         Self {
             router: Router::new(),
             state: (),
