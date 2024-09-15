@@ -24,6 +24,7 @@ use super::{ecs::world::World, player::Player, utils::world_util};
 
 const WATER_MASK: &str = include_str!("../../watermask.js");
 const UID_FIX: &str = include_str!("../../uidfix.js");
+const CENSORSHIP_FIX: &str = include_str!("../../censorshipfix.js");
 
 pub enum LogicInput {
     AddPlayer {
@@ -174,6 +175,9 @@ fn handle_logic_input(state: &mut LogicState, input: LogicInput) {
                 content: UID_FIX
                     .replace("{PLAYER_USERNAME}", &player.basic_info.name)
                     .replace("{SELECTED_COLOR}", "50FC71"),
+            });
+            player.notify(JsPatchNotify {
+                content: CENSORSHIP_FIX.to_string()
             });
 
             player.respond(EnterGameResponse::default(), enter_rpc_id);
