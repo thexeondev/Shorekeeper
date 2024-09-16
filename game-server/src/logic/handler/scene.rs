@@ -1,8 +1,8 @@
+use shorekeeper_protocol::combat_message::{CombatSendPackRequest, CombatSendPackResponse};
 use shorekeeper_protocol::{
     EntityActiveRequest, EntityActiveResponse, EntityOnLandedRequest, EntityOnLandedResponse,
     ErrorCode, MovePackagePush, UpdateSceneDateRequest, UpdateSceneDateResponse,
 };
-use shorekeeper_protocol::combat_message::{CombatSendPackRequest, CombatSendPackResponse};
 
 use crate::{logic::ecs::component::ComponentContainer, logic::player::Player, query_components};
 
@@ -43,6 +43,7 @@ pub fn on_entity_active_request(
         response.pos = Some(position.0.get_position_protobuf());
         response.rot = Some(position.0.get_rotation_protobuf());
     }
+
     response.component_pbs = Vec::new(); // not implemented
     response.error_code = ErrorCode::Success.into();
 }

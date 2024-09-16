@@ -11,9 +11,11 @@ use std::{
 };
 
 use common::time_util;
-use shorekeeper_protocol::{message::Message, JoinSceneNotify, TransitionOptionPb,
-                           AfterJoinSceneNotify, EnterGameResponse, JsPatchNotify};
-use shorekeeper_protocol::{PlayerSaveData};
+use shorekeeper_protocol::PlayerSaveData;
+use shorekeeper_protocol::{
+    message::Message, AfterJoinSceneNotify, EnterGameResponse, JoinSceneNotify, JsPatchNotify,
+    TransitionOptionPb,
+};
 
 use crate::{
     player_save_task::{self, PlayerSaveReason},
@@ -149,6 +151,7 @@ fn handle_logic_input(state: &mut LogicState, input: LogicInput) {
 
             player.init();
             player.set_session(session);
+            player.respond(EnterGameResponse::default(), enter_rpc_id);
             player.notify_general_data();
 
             player
@@ -168,6 +171,10 @@ fn handle_logic_input(state: &mut LogicState, input: LogicInput) {
                 scene_info: Some(scene_info),
                 transition_option: Some(TransitionOptionPb::default()),
             });
+
+            player.notify(AfterJoinSceneNotify::default());
+
+            // TODO: maybe move somewhere else?
             player.notify(JsPatchNotify {
                 content: WATER_MASK.to_string(),
             });
@@ -177,11 +184,9 @@ fn handle_logic_input(state: &mut LogicState, input: LogicInput) {
                     .replace("{SELECTED_COLOR}", "50FC71"),
             });
             player.notify(JsPatchNotify {
-                content: CENSORSHIP_FIX.to_string()
+                content: CENSORSHIP_FIX.to_string(),
             });
 
-            player.respond(EnterGameResponse::default(), enter_rpc_id);
-            player.notify(AfterJoinSceneNotify::default());
             drop(player);
 
             state

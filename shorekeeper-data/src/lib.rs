@@ -47,4 +47,5 @@ json_data! {
     BaseProperty;
     InstanceDungeon;
     FunctionCondition;
+    ExploreTools;
 }

@@ -1,5 +1,9 @@
+mod misc;
 mod scene;
+mod skill;
+pub use misc::*;
 pub use scene::*;
+pub use skill::*;
 
 use shorekeeper_protocol::message::Message;
 
@@ -59,10 +63,17 @@ macro_rules! handle_push {
 }
 
 handle_request! {
+    // Scene
     UpdateSceneDate;
     EntityActive;
     EntityOnLanded;
     CombatSendPack, combat_message;
+
+    // Skill
+    VisionExploreSkillSet;
+
+    // Misc
+    InputSetting;
 }
 
 handle_push! {

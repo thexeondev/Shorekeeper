@@ -4,18 +4,18 @@ use shorekeeper_protocol::{
     ScenePlayerInformation, SceneTimeInfo,
 };
 
+use super::entity_serializer;
 use crate::{
     logic::{
         components::{
-            Attribute, EntityConfig, Movement, OwnerPlayer, PlayerEntityMarker, Position,
-            Visibility, Weapon
+            Attribute, EntityConfig, Equip, Movement, OwnerPlayer, PlayerEntityMarker, Position,
+            Visibility, VisionSkill,
         },
         ecs::{component::ComponentContainer, world::World},
         player::Player,
     },
     query_with,
 };
-use super::entity_serializer;
 
 pub fn add_player_entities(world: &mut World, player: &Player) {
     let cur_role_id = player.get_cur_role_id();
@@ -43,9 +43,12 @@ pub fn add_player_entities(world: &mut World, player: &Player) {
                     .unwrap(),
             )))
             .with(ComponentContainer::Movement(Movement::default()))
-            .with(ComponentContainer::Weapon(Weapon {
+            .with(ComponentContainer::Equip(Equip {
                 weapon_id: role.equip_weapon,
                 weapon_breach_level: 0, // TODO: store this too
+            }))
+            .with(ComponentContainer::VisionSkill(VisionSkill {
+                skill_id: player.explore_tools.active_explore_skill,
             }))
             .build();
 

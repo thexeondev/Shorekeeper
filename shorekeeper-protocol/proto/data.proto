@@ -67,9 +67,16 @@ message PlayerFuncData {
 	map<int32, int32> func_map = 1;
 }
 
+message PlayerExploreToolsData {
+	repeated int32 unlocked_skill_list = 1;
+	int32 active_skill_id = 2;
+	repeated int32 roulette = 3;
+}
+
 message PlayerSaveData {
 	PlayerBasicData basic_data = 1;
 	PlayerRoleData role_data = 2;
 	PlayerLocationData location_data = 3;
 	PlayerFuncData func_data = 4;
+	PlayerExploreToolsData explore_tools_data = 5;
 }

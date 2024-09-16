@@ -23,12 +23,8 @@ impl Role {
     pub const MAIN_CHARACTER_MALE_ID: i32 = 1501;
     pub const MAIN_CHARACTER_FEMALE_ID: i32 = 1502;
 
-    pub fn new(role_id: i32, weapon_id: Option<i32>) -> Self {
+    pub fn new(role_id: i32) -> Self {
         let data = role_info_data::iter().find(|d| d.id == role_id).unwrap();
-        let equip_weapon = match weapon_id {
-            None => data.init_weapon_item_id,
-            Some(x) => x,
-        };
 
         Self {
             role_id,
@@ -40,7 +36,7 @@ impl Role {
             star: 0,
             favor: 0,
             create_time: time_util::unix_timestamp() as u32,
-            equip_weapon,
+            equip_weapon: data.init_weapon_item_id,
         }
     }
 

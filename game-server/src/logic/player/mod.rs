@@ -2,11 +2,12 @@ use std::{cell::RefCell, collections::HashSet, rc::Rc, sync::Arc};
 
 use basic_info::PlayerBasicInfo;
 use common::time_util;
+use explore_tools::ExploreTools;
 use location::PlayerLocation;
 use player_func::PlayerFunc;
 use shorekeeper_protocol::{
-    message::Message, PbGetRoleListNotify, PlayerBasicData, PlayerRoleData, PlayerSaveData,
-    ProtocolUnit,
+    message::Message, ItemPkgOpenNotify, PbGetRoleListNotify, PlayerBasicData, PlayerRoleData,
+    PlayerSaveData, ProtocolUnit,
 };
 
 use crate::session::Session;
@@ -17,6 +18,7 @@ use super::{
 };
 
 mod basic_info;
+mod explore_tools;
 mod in_world_player;
 mod location;
 mod player_func;
@@ -25,11 +27,14 @@ pub use in_world_player::InWorldPlayer;
 
 pub struct Player {
     session: Option<Arc<Session>>,
+    // Persistent
     pub basic_info: PlayerBasicInfo,
     pub role_list: Vec<Role>,
     pub formation_list: Vec<RoleFormation>,
     pub location: PlayerLocation,
     pub func: PlayerFunc,
+    pub explore_tools: ExploreTools,
+    // Runtime
     pub world: Rc<RefCell<World>>,
     pub last_save_time: u64,
 }
@@ -43,7 +48,9 @@ impl Player {
         // we need shorekeeper
         // TODO: remove this part after implementing team switch
         if !self.role_list.iter().any(|r| r.role_id == 1505) {
-            self.role_list.push(Role::new(1505, Some(21050036)));
+            let mut shorekeeper = Role::new(1505);
+            shorekeeper.equip_weapon = 21050036;
+            self.role_list.push(shorekeeper);
         }
 
         self.formation_list.clear();
@@ -56,12 +63,19 @@ impl Player {
         // End shorekeeper hardcode part
 
         self.ensure_current_formation();
+        self.ensure_basic_unlock_func();
     }
 
     pub fn notify_general_data(&self) {
         self.notify(self.basic_info.build_notify());
         self.notify(self.func.build_func_open_notify());
         self.notify(self.build_role_list_notify());
+        self.notify(self.explore_tools.build_explore_tool_all_notify());
+        self.notify(self.explore_tools.build_roulette_update_notify());
+
+        self.notify(ItemPkgOpenNotify {
+            open_pkg: (0..8).collect(),
+        });
     }
 
     fn on_first_enter(&mut self) {
@@ -80,6 +94,13 @@ impl Player {
         });
 
         self.location = PlayerLocation::default();
+    }
+
+    // Ensure basic functionality is unlocked
+    // Should be handled by quest progression,
+    // but as of right now, just unlock what we need
+    fn ensure_basic_unlock_func(&mut self) {
+        self.func.unlock(10026); // explore tools
     }
 
     fn ensure_current_formation(&mut self) {
@@ -162,6 +183,10 @@ impl Player {
                 .func_data
                 .map(PlayerFunc::load_from_save)
                 .unwrap_or_default(),
+            explore_tools: save_data
+                .explore_tools_data
+                .map(ExploreTools::load_from_save)
+                .unwrap_or_default(),
             world: Rc::new(RefCell::new(World::new())),
             last_save_time: time_util::unix_timestamp(),
         }
@@ -180,6 +205,7 @@ impl Player {
             }),
             location_data: Some(self.location.build_save_data()),
             func_data: Some(self.func.build_save_data()),
+            explore_tools_data: Some(self.explore_tools.build_save_data()),
         }
     }
 
@@ -216,8 +242,8 @@ impl Player {
 
     fn create_main_character_role(name: String, sex: i32) -> Role {
         let mut role = match sex {
-            0 => Role::new(Role::MAIN_CHARACTER_FEMALE_ID, None),
-            1 => Role::new(Role::MAIN_CHARACTER_MALE_ID, None),
+            0 => Role::new(Role::MAIN_CHARACTER_FEMALE_ID),
+            1 => Role::new(Role::MAIN_CHARACTER_MALE_ID),
             _ => unreachable!(),
         };
 

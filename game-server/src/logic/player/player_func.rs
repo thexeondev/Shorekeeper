@@ -8,6 +8,10 @@ pub struct PlayerFunc {
 }
 
 impl PlayerFunc {
+    pub fn unlock(&mut self, id: i32) {
+        self.func_map.insert(id, 2);
+    }
+
     pub fn load_from_save(data: PlayerFuncData) -> Self {
         PlayerFunc {
             func_map: data.func_map,
