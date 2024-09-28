@@ -5087,16 +5087,16 @@ message ItemDict {
   repeated ItemEntry Items = 1;
 }
 
-message Uih2 {
+message DragonPoolDropItems {
   int32 DragonPoolId = 1;
-  repeated int32 QSs = 2;
-  repeated ItemDict XSs = 3;
+  repeated int32 QSs = 2; // Not used in code, niggers
+  repeated ItemDict DropItems = 3;
 }
 
 // MessageId: 21983 (Response)
 message ghs2 {
   ErrorCode ErrorCode = 21;
-  Uih2 Uih = 199;
+  DragonPoolDropItems Uih = 199;
 }
 
 // MessageId: 26716 (Request)
@@ -5112,17 +5112,17 @@ message Mth1 {
 }
 
 // MessageId: 25864 (Request)
-message Ith1 {
+message DarkCoastDeliveryRequest {
   int32 DragonPoolId = 200;
 }
 
 // MessageId: 23120 (Response)
-message Tth1 {
+message DarkCoastDeliveryResponse {
   ErrorCode ErrorCode = 104;
-  Uih2 Uih = 43;
-  repeated int32 bih1 = 82;
-  repeated int32 Bih2 = 14;
-  int32 xih1 = 1;
+  DragonPoolDropItems DragonPoolDropItems = 43;
+  repeated int32 DefeatedGuard = 82;
+  repeated int32 ReceivedGuardReward = 14;
+  int32 LevelGain = 1;
 }
 
 enum BattlePassType {
@@ -6885,7 +6885,7 @@ message ApplyGameplayEffectRequest {
 
 // MessageId: 18140 (Response)
 message ApplyGameplayEffectResponse {
-  int32 errCode = 61;
+  ErrorCode ErrorCode = 61;
 }
 
 // MessageId: 26675 (Notify)
@@ -6913,7 +6913,7 @@ message RemoveGameplayEffectRequest {
 
 // MessageId: 23319 (Response)
 message RemoveGameplayEffectResponse {
-  int32 errCode = 53;
+  ErrorCode ErrorCode = 53;
   int32 Handle = 38;
 }
 
@@ -7296,15 +7296,15 @@ message t3n {
   int32 State = 32;
 }
 
-message fFs1 {
+message DFsm {
   int32 FsmId = 1;
-  int32 OTs2 = 2;
+  int32 CurrentState = 2;
   int32 Flag = 3;
   int32 kTs = 6;
 }
 
 message EntityFsmComponentPb {
-  repeated fFs1 NTs = 1;
+  repeated DFsm Fsms = 1;
   int32 HashCode = 2;
   int32 CommonHashCode = 3;
   repeated DFsmBlackBoard BlackBoard = 4;
@@ -8103,7 +8103,7 @@ message Rca {
 }
 
 message CombatMessage {
-  message CombatMessageTest {
+  message CombatPushData {
     CombatCommon CombatCommon = 1;
     oneof Message {
       FormationBuffApplyS2cResponsePush FormationBuffApplyS2cResponsePush = 2;
@@ -8336,8 +8336,8 @@ message CombatMessage {
   }
   message CombatSendData {
     oneof Message {
-      CombatMessage.CombatMessageTest Push = 2;
-      CombatMessage.CombatRequestData request = 3;
+      CombatMessage.CombatPushData Push = 2;
+      CombatMessage.CombatRequestData Request = 3;
     }
 
   }
@@ -12497,8 +12497,8 @@ message NormalItemUpdateNotify {
 }
 
 // MessageId: 22716 (Notify)
-message pns {
-  repeated int32 Pws = 146;
+message NormalItemRemoveNotify {
+  repeated int32 NormalItemIdList = 146;
 }
 
 // MessageId: 28027 (Notify)
@@ -12525,8 +12525,8 @@ message WeaponItemAddNotify {
 }
 
 // MessageId: 21270 (Notify)
-message Ins1 {
-  repeated int32 xws = 102;
+message WeaponItemRemoveNotify {
+  repeated int32 WeaponItemIncrIdList = 102;
 }
 
 // MessageId: 27123 (Request)
@@ -15819,114 +15819,114 @@ enum SceneStepStatus {
   SceneStepStatus_Failed = 2;
 }
 
-message M8s2 {
+message SceneStepConditionProgress {
   int32 ConditionId = 1;
-  int32 Oqs = 2;
+  int32 ProgressNum = 2;
 }
 
-message S8s {
+message SceneStepPlayerProgress {
   int32 PlayerId = 1;
-  repeated M8s2 Progress = 2;
+  repeated SceneStepConditionProgress Progress = 2;
 }
 
-message E8s {
-  int32 kqs = 1;
+message SceneStepInfo {
+  int32 StepId = 1;
   int32 Status = 2;
-  repeated M8s2 Progress = 3;
-  repeated S8s Nqs = 4;
+  repeated SceneStepConditionProgress Progress = 3;
+  repeated SceneStepPlayerProgress MultiPlayerProgress = 4;
 }
 
-message y8s {
-  int32 Fqs1 = 1;
-  repeated E8s Vqs = 2;
+message SceneStepGroupInfo {
+  int32 StepGroupId = 1;
+  repeated SceneStepInfo Vqs = 2;
 }
 
 // MessageId: 23058 (Notify)
-message Ims2 {
-  repeated y8s DOLLARqs = 165;
+message SceneStepGroupInfoNotify {
+  repeated SceneStepGroupInfo StepGroupInfo = 165;
 }
 
 // MessageId: 21075 (Notify)
-message Tms1 {
-  int32 Fqs1 = 55;
-  E8s Hqs = 129;
+message SceneStepInfoNotify {
+  int32 StepGroupId = 55;
+  SceneStepInfo StepInfo = 129;
 }
 
 // MessageId: 16494 (Request)
-message Lms2 {
+message TargetGearHitRequest {
   int64 EntityId = 81;
 }
 
 // MessageId: 19766 (Response)
-message Rms1 {
+message TargetGearHitResponse {
   ErrorCode ErrorCode = 170;
 }
 
 // MessageId: 24959 (Request)
-message Dms3 {
+message ThrowDamageRequest {
   int64 EntityId = 90;
-  int64 I5n1 = 167;
+  int64 CalculateId = 167;
 }
 
 // MessageId: 19365 (Response)
-message Ams3 {
+message ThrowDamageResponse {
   ErrorCode ErrorCode = 87;
 }
 
 // MessageId: 18924 (Notify)
-message Pms {
+message ThrowDamageNotify {
   int64 EntityId = 211;
-  int32 jqs = 104;
+  int32 Durability = 104;
 }
 
 // MessageId: 17147 (Notify)
-message Ums2 {
+message ThrowDamageRecoveryNotify {
   int64 EntityId = 221;
-  int32 jqs = 229;
+  int32 Durability = 229;
 }
 
 // MessageId: 27451 (Request)
-message wms2 {
+message GetRewardTreasureBoxRequest {
   int64 EntityId = 82;
 }
 
 // MessageId: 26500 (Response)
-message xms1 {
+message GetRewardTreasureBoxResponse {
   ErrorCode ErrorCode = 49;
 }
 
-message I8s {
-  int32 Flag = 1;
-  float M8n = 2;
-  float S8n = 3;
-  float E8n = 4;
-  float y8n = 5;
-  int32 I8n = 6;
-  int32 T8n = 7;
+message MobileButtonSetting {
+  int32 Id = 1;
+  float Size = 2;
+  float Transparency = 3;
+  float ScreenX = 4;
+  float ScreenY = 5;
+  int32 ButtonLevel = 6;
+  int32 PanelLevel = 7;
 }
 
 // MessageId: 23399 (Notify)
-message bms1 {
-  repeated I8s v8n = 62;
+message SettingNotify {
+  repeated MobileButtonSetting MobileButtonSettings = 62;
 }
 
 // MessageId: 17765 (Request)
-message Bms2 {
-  repeated I8s v8n = 113;
+message MobileButtonSettingUpdateRequest {
+  repeated MobileButtonSetting MobileButtonSettings = 113;
 }
 
 // MessageId: 28703 (Response)
-message qms1 {
+message MobileButtonSettingUpdateResponse {
   ErrorCode ErrorCode = 146;
 }
 
 // MessageId: 24990 (Request)
-message Gms1 {
+message LanguageSettingUpdateRequest {
   int32 Language = 55;
 }
 
 // MessageId: 17062 (Response)
-message Oms1 {
+message LanguageSettingUpdateResponse {
   ErrorCode ErrorCode = 108;
 }
 
@@ -16011,7 +16011,7 @@ message InputSettingUpdateRequest {
 
 // MessageId: 29049 (Response)
 message InputSettingUpdateResponse {
-  int32 ErrorCode = 240;
+  ErrorCode ErrorCode = 240;
 }
 
 // MessageId: 16176 (Notify)

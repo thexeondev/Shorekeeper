@@ -1745,10 +1745,14 @@ version = "0.1.0"
 dependencies = [
  "byteorder",
  "crc32fast",
+ "prettyplease",
  "prost",
  "prost-build",
  "quote",
+ "serde",
+ "serde_json",
  "shorekeeper-protocol-derive",
+ "syn",
  "thiserror",
 ]
 

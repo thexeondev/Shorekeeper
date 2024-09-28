@@ -8,8 +8,12 @@ byteorder.workspace = true
 crc32fast.workspace = true
 thiserror.workspace = true
 prost.workspace = true
+serde.workspace = true
+serde_json.workspace = true
 shorekeeper-protocol-derive.workspace = true
 
 [build-dependencies]
 prost-build.workspace = true
 quote = "1.0.35"
+syn = "2.0.76"
+prettyplease = "0.2.22"
