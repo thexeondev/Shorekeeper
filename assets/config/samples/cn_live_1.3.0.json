@@ -1,0 +1,64 @@
+{
+  "default": {
+    "CdnUrl": [
+      {
+        "url": "https://cdn-huoshan-cn-mc.aki-game.com/prod/client/",
+        "weight": "0"
+      },
+      {
+        "url": "https://cdn-qiniu-cn-mc.aki-game.com/prod/client/",
+        "weight": "4181"
+      },
+      {
+        "url": "https://cdn-qcloud-cn-mc.aki-game.com/prod/client/",
+        "weight": "2937"
+      },
+      {
+        "url": "https://cdn-aliyun-cn-mc.aki-game.com/prod/client/",
+        "weight": "0"
+      }
+    ],
+    "SecondaryUrl": [],
+    "PriceRatio": 1,
+    "SpeedRatio": 1,
+    "GachaUrl": {
+      "GachaRecord": "https://aki-gm-resources.aki-game.com",
+      "GachaPoolDetail": "https://aki-gm-resources.aki-game.com"
+    },
+    "LogReport": {
+      "name": "aki-upload-log-1319073642",
+      "region": "ap-shanghai"
+    },
+    "PackageUpdateDescUrl": {
+      "MainUrl": "https://aki-gm-resources-back.aki-game.com/force_update/UpdateDesc.html",
+      "SubUrl": "https://aki-gm-resources-back-qiniu.aki-game.com/force_update/UpdateDesc.html"
+    },
+    "PackageUpdateUrl": {
+      "MainUrl": "https://aki-gm-resources-back.aki-game.com/force_update/UpdateJs.html",
+      "SubUrl": "https://aki-gm-resources-back-qiniu.aki-game.com/force_update/UpdateJs.html"
+    },
+    "TDCfg": {
+      "AppID": "7be70c9c181f4fa8bc013e9b89d2b63b",
+      "URL": "http://cn-datareceiver.aki-game.com"
+    },
+    "GmOpen": false,
+    "IosAuditFirstDownloadTip": false,
+    "NoticeUrl": "https://aki-gm-resources-back.aki-game.com",
+    "MixUri": "e66lKLx7RnUf9QlkMCGaW0jdyjRV1weo",
+    "ResUri": "e66lKLx7RnUf9QlkMCGaW0jdyjRV1weo",
+    "LoginServers": [
+      {
+        "id": "76402e5b20be2c39f095a152090afddc",
+        "ip": "https://login-sh.aki-game.com",
+        "name": "鸣潮"
+      }
+    ],
+    "PrivateServers": {
+      "enable": false,
+      "serverUrl": ""
+    }
+  },
+  "p1": {
+    "IosAuditFirstDownloadTip": false
+  }
+}

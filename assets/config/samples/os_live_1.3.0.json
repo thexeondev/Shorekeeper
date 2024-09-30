@@ -1,0 +1,115 @@
+{
+  "default": {
+    "CdnUrl": [
+      {
+        "url": "https://cdn-aws-hw-mc.aki-game.net/prod/client/",
+        "weight": "829"
+      },
+      {
+        "url": "https://cdn-qcloud-hw-mc.aki-game.net/prod/client/",
+        "weight": "0"
+      },
+      {
+        "url": "https://cdn-akamai-hw-mc.aki-game.net/prod/client/",
+        "weight": "262"
+      },
+      {
+        "url": "https://cdn-huoshan-hw-mc.aki-game.net/prod/client/",
+        "weight": "829"
+      }
+    ],
+    "SecondaryUrl": [],
+    "PriceRatio": 1,
+    "SpeedRatio": 1,
+    "GachaUrl": {
+      "GachaRecord": "https://aki-gm-resources-oversea.aki-game.net",
+      "GachaPoolDetail": "https://aki-gm-resources-oversea.aki-game.net"
+    },
+    "LogReport": {
+      "name": "hw-aki-upload-log-1319073642",
+      "region": "ap-singapore"
+    },
+    "PackageUpdateDescUrl": {
+      "MainUrl": "https://aki-gm-resources-back.aki-game.net/force_update/UpdateDesc.html",
+      "SubUrl": "https://aki-gm-resources-back-aws.aki-game.net/force_update/UpdateDesc.html"
+    },
+    "PackageUpdateUrl": {
+      "MainUrl": "https://aki-gm-resources-back.aki-game.net/force_update/UpdateJs.html",
+      "SubUrl": "https://aki-gm-resources-back-aws.aki-game.net/force_update/UpdateJs.html"
+    },
+    "GARUrl": "https://gar-service.aki-game.net",
+    "TDCfg": {
+      "URL": "http://us-datareceiver.aki-game.net",
+      "AppID": "bf3f44edc6cf43c582e347ba660876c0"
+    },
+    "GmOpen": false,
+    "IosAuditFirstDownloadTip": false,
+    "NoticeUrl": "https://aki-gm-resources-back.aki-game.net",
+    "MixUri": "u4S3uXaif7gNKnNGnbZ6WnW67vWFmQgd",
+    "ResUri": "u4S3uXaif7gNKnNGnbZ6WnW67vWFmQgd",
+    "LoginServers": [
+      {
+        "PingUrl": "49.51.79.239",
+        "Region": "America",
+        "TDCfg": {
+          "AppID": "12c7c870b57541caa2093e275212f083",
+          "URL": "http://us-datareceiver.aki-game.net"
+        },
+        "id": "591d6af3a3090d8ea00d8f86cf6d7501",
+        "ip": "https://login-us.aki-game.net",
+        "name": "America"
+      },
+      {
+        "PingUrl": "124.156.236.245",
+        "Region": "Asia",
+        "TDCfg": {
+          "AppID": "dc2e8c02609546e89d78c2eb2974becb",
+          "URL": "http://jp-datareceiver.aki-game.net"
+        },
+        "id": "86d52186155b148b5c138ceb41be9650",
+        "ip": "https://login-jp.aki-game.net",
+        "name": "Asia"
+      },
+      {
+        "PingUrl": "49.51.129.88",
+        "Region": "Europe",
+        "TDCfg": {
+          "AppID": "0fb77e4801db41a7a1fb1a3431625fbd",
+          "URL": "http://eu-datareceiver.aki-game.net"
+        },
+        "id": "6eb2a235b30d05efd77bedb5cf60999e",
+        "ip": "https://login-eu.aki-game.net",
+        "name": "Europe"
+      },
+      {
+        "PingUrl": "43.129.150.38",
+        "Region": "HMT",
+        "TDCfg": {
+          "AppID": "5ccd297c928d405a9e6b18a122f4d48d",
+          "URL": "http://hk-datareceiver.aki-game.net"
+        },
+        "id": "919752ae5ea09c1ced910dd668a63ffb",
+        "ip": "https://login-hk.aki-game.net",
+        "name": "HMT(HK, MO, TW)"
+      },
+      {
+        "PingUrl": "101.33.100.22",
+        "Region": "SEA",
+        "TDCfg": {
+          "AppID": "dffd1143291b4877a8866fb24c623038",
+          "URL": "http://as-datareceiver.aki-game.net"
+        },
+        "id": "10cd7254d57e58ae560b15d51e34b4c8",
+        "ip": "https://login-sg.aki-game.net",
+        "name": "SEA"
+      }
+    ],
+    "PrivateServers": {
+      "enable": false,
+      "serverUrl": ""
+    }
+  },
+  "p1": {
+    "IosAuditFirstDownloadTip": false
+  }
+}
