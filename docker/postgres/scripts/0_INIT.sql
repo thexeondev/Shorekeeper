@@ -1,3 +1,3 @@
-CREATE DATABASE shorekeeper_db;
-CREATE USER shorekeeper_user WITH encrypted password 'shorekeeper_pass';
-GRANT ALL PRIVILEGES ON DATABASE shorekeeper_db to shorekeeper_user;
+CREATE DATABASE camellya_db;
+CREATE USER camellya_user WITH encrypted password 'camellya_pass';
+GRANT ALL PRIVILEGES ON DATABASE camellya_db to camellya_user;

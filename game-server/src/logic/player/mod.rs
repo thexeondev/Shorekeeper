@@ -47,17 +47,17 @@ impl Player {
 
         // we need shorekeeper
         // TODO: remove this part after implementing team switch
-        if !self.role_list.iter().any(|r| r.role_id == 1505) {
-            let mut shorekeeper = Role::new(1505);
-            shorekeeper.equip_weapon = 21050036;
-            self.role_list.push(shorekeeper);
+        if !self.role_list.iter().any(|r| r.role_id == 1603) {
+            let mut camellya = Role::new(1603);
+            camellya.equip_weapon = 21020026;
+            self.role_list.push(camellya);
         }
 
         self.formation_list.clear();
         self.formation_list.push(RoleFormation {
             id: 1,
-            cur_role: 1505,
-            role_id_set: HashSet::from([1505]),
+            cur_role: 1603,
+            role_id_set: HashSet::from([1603]),
             is_current: true,
         });
         // End shorekeeper hardcode part
@@ -258,7 +258,7 @@ impl Player {
                 name,
                 sex,
                 level: 1,
-                head_photo: 1505,
+                head_photo: 1603,
                 head_frame: 80060009,
                 ..Default::default()
             }),

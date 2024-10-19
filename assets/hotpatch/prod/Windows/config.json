@@ -1,60 +1,44 @@
 {
-    "PackageVersion": "1.3.0",
-    "LauncherVersion": "1.3.9",
-    "ResourceVersion": "1.3.9",
-    "LauncherIndexSha1": {
-        "1.3.1": "90FDF17EA0B4015D43C344CB7229E76AB32549DD",
-        "1.3.2": "C9A587AB1FA6CA57CD23E0FB3F0103BFDCAA8E37",
-        "1.3.3": "1C7AF02F13DBE69637DB43039E2FFB8C9AD9A04B",
-        "1.3.4": "DA50F315041E216568A7713074C6475F6AB4530E",
-        "1.3.5": "EA9C6F6D5E920F47F96D8F8BC366A4CED62A0346",
-        "1.3.6": "8CA7E6573A52B16CFAA29E996D389918B6829E7A",
-        "1.3.7": "FCAAED58E5983027A82F52C350418CCE7BD531D2",
-        "1.3.8": "91D6231B3F4C9A6605B79E23D0C02F9790DD6BCF",
-        "1.3.9": "B36BD648AB2A637A4E087B7B115A6CCBDAEBDF9A"
-    },
+    "PackageVersion": "1.4.0",
+    "LauncherVersion": "1.4.0",
+    "ResourceVersion": "1.4.3",
+    "LauncherIndexSha1": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
     "ResourceIndexSha1": {
-        "1.3.1": "2D635E549EB6F99659571D72741B62249473A77A",
-        "1.3.2": "C5814A80EA3E7D80D4CFBCD884D1FD158BF0AD9D",
-        "1.3.3": "1E0F05333B09A9215B4AA5C437BFC7DC4014E348",
-        "1.3.4": "6155D492540A99ECF0DA06D2B7EEBFE36231FBC2",
-        "1.3.5": "1E60C8F60CA1AAA9955441B4F4265C8288B95F33",
-        "1.3.6": "AA10A8DD1025D5033E291060C686B816513ADCAD",
-        "1.3.7": "A9881305EBD3DC5A6892D49BDAF540F56EE56232",
-        "1.3.8": "261CA25DAD6877DF3C57DA39947130867FCC09CE",
-        "1.3.9": "88A9E40631FC1C11A91A61CB3F4BE8C13C5E2BD3"
+        "1.4.1": "0C747E444EC6DBA11D0C57B34E2638DE5182029F",
+        "1.4.2": "41751A94DBD406653DB52262E85BB716E45D9864",
+        "1.4.3": "424EDFD97BA8699CBC2CB9E27D3FCBB6F7C70806"
     },
-    "ChangeList": "2333675",
+    "ChangeList": "2585778",
     "CompatibleChangeLists": [],
     "Versions": [
         {
             "Name": "en",
-            "Version": "1.3.0",
+            "Version": "1.4.0",
             "IndexSha1": {
-                "1.3.0": "6FB5B66EF8B3EECBBBEBE74A82BC23E3FC35450B"
+                "1.4.0": "34F9AC326B3E81E972B93094E43751967A6A3396"
             }
         },
         {
             "Name": "ja",
-            "Version": "1.3.0",
+            "Version": "1.4.0",
             "IndexSha1": {
-                "1.3.0": "E4DA1960DB36CE8166C042AD8B9AF98C1A9119F3"
+                "1.4.0": "3233223428D586FBC0A2EC817F4E94DDD10C646F"
             }
         },
         {
             "Name": "ko",
-            "Version": "1.3.0",
+            "Version": "1.4.0",
             "IndexSha1": {
-                "1.3.0": "498B379E95FC617385CCD832B8C359FA5AC220CE"
+                "1.4.0": "3CC0312BDFFF5FA4D3F5256E2618D0EF6AA84912"
             }
         },
         {
             "Name": "zh",
-            "Version": "1.3.0",
+            "Version": "1.4.0",
             "IndexSha1": {
-                "1.3.0": "CC58C357A80E7B3846264918197FC3ECAA1FE190"
+                "1.4.0": "2F3AD1412C6991FE0E146C5E2F6F86D8D9F44A5D"
             }
         }
     ],
-    "UpdateTime": 1725869509
+    "UpdateTime": 1729243476
 }

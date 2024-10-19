@@ -1,3 +1,4 @@
+.idea
 /target
 /hotpatch.toml
 /configserver.toml

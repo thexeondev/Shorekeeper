@@ -1,0 +1,13 @@
+name: camellya-ps
+
+services:
+  camellya-hotpatch-server:
+    image: camellya-hotpatch-server:1.3.0-SNAPSHOT
+    depends_on:
+      camellya-postgres:
+        condition: service_healthy
+    ports:
+      - '10002:10002'
+    volumes:
+      - "./docker/hotpatch.toml:/app/hotpatch.toml"
+      - "./assets/hotpatch:/app/assets/hotpatch"

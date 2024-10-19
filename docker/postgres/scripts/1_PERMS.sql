@@ -1,2 +1,2 @@
-\c shorekeeper_db;
-GRANT ALL ON SCHEMA public TO shorekeeper_user;
+\c camellya_db;
+GRANT ALL ON SCHEMA public TO camellya_user;

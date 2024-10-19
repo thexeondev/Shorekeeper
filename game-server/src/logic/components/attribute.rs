@@ -70,7 +70,7 @@ impl Attribute {
         def,
         energy_efficiency,
         cd_reduse,
-        reaction_efficiency,
+        element_efficiency,
         damage_change_normal_skill,
         damage_change,
         damage_reduce,

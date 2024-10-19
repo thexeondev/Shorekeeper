@@ -26,8 +26,9 @@ pub fn main() {
 
         prost_build::Config::new()
             .out_dir(CODEGEN_OUT_DIR)
+            .default_package_filename("shorekeeper")
             .type_attribute(".", "#[derive(shorekeeper_protocol_derive::MessageID)]")
-            .type_attribute(".", "#[derive(serde::Serialize,serde::Deserialize)]")
+            .type_attribute(".", "#[derive(serde::Serialize, serde::Deserialize)]")
             .compile_protos(&[proto_file], &["shorekeeper"])
             .unwrap();
 

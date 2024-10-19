@@ -1,6 +1,15 @@
+mod combat;
+mod entity;
+mod guide;
+mod mail;
 mod misc;
 mod scene;
 mod skill;
+
+pub use combat::*;
+pub use entity::*;
+pub use guide::*;
+pub use mail::*;
 pub use misc::*;
 pub use scene::*;
 pub use skill::*;
@@ -29,7 +38,14 @@ macro_rules! handle_request {
                             player.respond(response, msg.get_rpc_id());
                         },
                     )*
-                    unhandled => ::tracing::warn!("can't find handler for request with message_id={unhandled}")
+                    unhandled => {
+                         ::tracing::warn!("can't find handler for request with message_id={unhandled}");
+                         let tmp = &*msg.remove_payload();
+                         let (name, value) = shorekeeper_protocol::proto_dumper::get_debug_info(
+                             unhandled, tmp,
+                         ).unwrap_or_else(|err| ("Error", err.to_string()));
+                        tracing::debug!("trying to log unhandled data for message {name} with:\n{value}")
+                    }
                 }
             }
         }
@@ -55,7 +71,14 @@ macro_rules! handle_push {
                             [<on_ $($inner_package:snake _)? $name:snake _push>](player, push);
                         },
                     )*
-                    unhandled => ::tracing::warn!("can't find handler for push with message_id={unhandled}")
+                    unhandled => {
+                         ::tracing::warn!("can't find handler for push with message_id={unhandled}");
+                         let tmp = &*msg.remove_payload();
+                         let (name, value) = shorekeeper_protocol::proto_dumper::get_debug_info(
+                             unhandled, tmp,
+                         ).unwrap_or_else(|err| ("Error", err.to_string()));
+                        tracing::debug!("trying to log unhandled data for message {name} with:\n{value}")
+                    }
                 }
             }
         }
@@ -63,21 +86,42 @@ macro_rules! handle_push {
 }
 
 handle_request! {
-    // Scene
-    UpdateSceneDate;
-    EntityActive;
-    EntityOnLanded;
+    // Combat
     CombatSendPack, combat_message;
 
-    // Skill
-    VisionExploreSkillSet;
+    // Entity
+    EntityActive;
+    EntityOnLanded;
+    EntityPosition;
+    EntityLoadComplete;
+
+    // Guide
+    GuideInfo;
+
+    // Mail
+    MailBindInfo;
 
     // Misc
     InputSetting;
+    InputSettingUpdate;
+    LanguageSettingUpdate;
+    ServerPlayStationPlayOnlyState;
+
+    // Scene
+    SceneTrace;
+    SceneLoadingFinish;
+    UpdateSceneDate;
+
+    // Skill
+    VisionExploreSkillSet;
 }
 
 handle_push! {
+    // Entity
     MovePackage;
+
+    // Misc
+    VersionInfo;
 }
 
 pub fn handle_logic_message(player: &mut super::player::Player, msg: Message) {

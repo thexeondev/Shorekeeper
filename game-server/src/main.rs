@@ -20,7 +20,7 @@ async fn main() -> Result<()> {
 
     ::common::splash::print_splash();
     ::common::logging::init(::tracing::Level::DEBUG);
-    shorekeeper_data::load_json_data("assets/logic/json")?;
+    shorekeeper_data::load_json_data("assets/logic/BinData")?;
 
     let database = Arc::new(shorekeeper_database::connect_to(&CONFIG.database).await?);
     shorekeeper_database::run_migrations(database.as_ref()).await?;

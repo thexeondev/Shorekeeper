@@ -24,7 +24,7 @@ use crate::{
 
 use super::{ecs::world::World, player::Player, utils::world_util};
 
-const WATER_MASK: &str = include_str!("../../watermask.js");
+const WATER_MASK: &str = include_str!("../../watermask-rr.js");
 const UID_FIX: &str = include_str!("../../uidfix.js");
 const CENSORSHIP_FIX: &str = include_str!("../../censorshipfix.js");
 
@@ -176,6 +176,7 @@ fn handle_logic_input(state: &mut LogicState, input: LogicInput) {
 
             // TODO: maybe move somewhere else?
             player.notify(JsPatchNotify {
+                // TODO: Add the possibility to customize size and text from options
                 content: WATER_MASK.to_string(),
             });
             player.notify(JsPatchNotify {

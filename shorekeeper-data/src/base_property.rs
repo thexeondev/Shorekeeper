@@ -16,7 +16,6 @@ pub struct BasePropertyData {
     pub def: i32,
     pub energy_efficiency: i32,
     pub cd_reduse: i32,
-    pub reaction_efficiency: i32,
     pub damage_change_normal_skill: i32,
     pub damage_change: i32,
     pub damage_reduce: i32,
@@ -140,4 +139,5 @@ pub struct BasePropertyData {
     pub paralysis_time_recover: i32,
     pub element_energy_max: i32,
     pub element_energy: i32,
+    pub element_efficiency: i32,
 }

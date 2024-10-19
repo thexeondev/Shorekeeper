@@ -2,8 +2,16 @@
     "default": {
         "CdnUrl": [
             {
-                "url": "http://127.0.0.1:10002/prod/client/",
+                "url": "https://cdn-huoshan-cn-mc.aki-game.com/prod/client/",
                 "weight": "2323"
+            },
+            {
+                "url": "https://cdn-qiniu-cn-mc.aki-game.com/prod/client/",
+                "weight": "1"
+            },
+            {
+                "url": "https://cdn-qcloud-cn-mc.aki-game.com/prod/client/",
+                "weight": "5443"
             }
         ],
         "SecondaryUrl": [],
@@ -32,13 +40,13 @@
         "GmOpen": false,
         "IosAuditFirstDownloadTip": false,
         "NoticeUrl": "http://127.0.0.1:10001/notice",
-        "MixUri": "rODM5DcqOhYsIOtsEuZWNGFa2guZgl57",
-        "ResUri": "rODM5DcqOhYsIOtsEuZWNGFa2guZgl57",
+        "MixUri": "fcQrWOPC2RkghpzsAE2kyGWD37QTm2mR",
+        "ResUri": "fcQrWOPC2RkghpzsAE2kyGWD37QTm2mR",
         "LoginServers": [
             {
                 "id": "f9e0fc655c1931bc03ad976e9fc14473",
                 "ip": "http://127.0.0.1:5500",
-                "name": "Shorekeeper"
+                "name": "Camellya"
             }
         ],
         "PrivateServers": {

@@ -86,7 +86,7 @@ async fn on_login_request(
             .flatten()
     else {
         tracing::debug!("login: account '{}' not found", &request.account);
-        response.code = ErrorCode::InvalidUserId.into();
+        response.error_code = ErrorCode::InvalidUserId.into();
         return;
     };
 
@@ -100,7 +100,7 @@ async fn on_login_request(
             &request.login_trace_id,
             &account.user_id
         );
-        response.code = ErrorCode::LoginRetry.into();
+        response.error_code = ErrorCode::LoginRetry.into();
         return;
     }
 
@@ -113,7 +113,7 @@ async fn on_login_request(
                 ban_time_stamp,
                 ban_time_stamp - cur_time_stamp
             );
-            response.code = ErrorCode::AccountIsBlocked.into();
+            response.error_code = ErrorCode::AccountIsBlocked.into();
             return;
         }
     }
@@ -134,12 +134,12 @@ async fn on_login_request(
             "login: first login on account {}, awaiting create character request",
             &account.user_id
         );
-        response.code = ErrorCode::HaveNoCharacter.into();
+        response.error_code = ErrorCode::HaveNoCharacter.into();
         return;
     };
 
     session.player_id = Some(player_id);
-    response.code = ErrorCode::Success.into();
+    response.error_code = ErrorCode::Success.into();
     response.timestamp = time_util::unix_timestamp_ms() as i64;
 
     tracing::info!(
