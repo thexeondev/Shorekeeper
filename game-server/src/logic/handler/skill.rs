@@ -13,8 +13,11 @@ pub fn on_vision_explore_skill_set_request(
 ) {
     player.explore_tools.active_explore_skill = request.skill_id;
 
-    let world = player.world.borrow();
-    for (entity, owner, mut vision_skill) in query_with!(world, OwnerPlayer, VisionSkill) {
+    for (entity, owner, mut vision_skill) in query_with!(
+        player.world.borrow().get_world_entity(),
+        OwnerPlayer,
+        VisionSkill
+    ) {
         if owner.0 == player.basic_info.id {
             vision_skill.skill_id = request.skill_id;
             player.notify(VisionSkillChangeNotify {

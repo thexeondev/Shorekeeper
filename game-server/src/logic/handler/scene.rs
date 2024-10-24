@@ -1,6 +1,6 @@
-use shorekeeper_protocol::{ErrorCode, SceneLoadingFinishRequest, SceneLoadingFinishResponse,
-                           SceneTraceRequest, SceneTraceResponse, UpdateSceneDateRequest,
-                           UpdateSceneDateResponse,
+use shorekeeper_protocol::{
+    ErrorCode, SceneLoadingFinishRequest, SceneLoadingFinishResponse, SceneTraceRequest,
+    SceneTraceResponse, UpdateSceneDateRequest, UpdateSceneDateResponse,
 };
 
 use crate::logic::player::Player;
@@ -15,7 +15,7 @@ pub fn on_scene_trace_request(
 
 pub fn on_scene_loading_finish_request(
     _player: &Player,
-    request: SceneLoadingFinishRequest,
+    _request: SceneLoadingFinishRequest,
     response: &mut SceneLoadingFinishResponse,
 ) {
     // TODO: Implement this if needed

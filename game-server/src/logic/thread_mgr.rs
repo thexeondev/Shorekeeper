@@ -1,3 +1,10 @@
+use common::time_util;
+use shorekeeper_protocol::PlayerSaveData;
+use shorekeeper_protocol::{
+    message::Message, AfterJoinSceneNotify, EnterGameResponse, JoinSceneNotify, JsPatchNotify,
+    TransitionOptionPb,
+};
+use std::collections::hash_map::Entry::Vacant;
 use std::{
     cell::RefCell,
     collections::{HashMap, VecDeque},
@@ -10,19 +17,12 @@ use std::{
     time::Duration,
 };
 
-use common::time_util;
-use shorekeeper_protocol::PlayerSaveData;
-use shorekeeper_protocol::{
-    message::Message, AfterJoinSceneNotify, EnterGameResponse, JoinSceneNotify, JsPatchNotify,
-    TransitionOptionPb,
-};
-
+use super::{ecs::world::World, player::Player, utils::world_util};
+use crate::logic::ecs::world::WorldEntity;
 use crate::{
     player_save_task::{self, PlayerSaveReason},
     session::Session,
 };
-
-use super::{ecs::world::World, player::Player, utils::world_util};
 
 const WATER_MASK: &str = include_str!("../../watermask-rr.js");
 const UID_FIX: &str = include_str!("../../uidfix.js");
@@ -141,13 +141,29 @@ fn handle_logic_input(state: &mut LogicState, input: LogicInput) {
             session,
             player_save_data,
         } => {
-            let player = state
-                .players
-                .entry(player_id)
-                .or_insert(RefCell::new(Player::load_from_save(player_save_data)));
+            let (player, is_player) = if let Vacant(e) = state.players.entry(player_id) {
+                (
+                    e.insert(RefCell::new(Player::load_from_save(player_save_data))),
+                    true,
+                )
+            } else {
+                if let Some(player) = state.players.get_mut(&player_id) {
+                    (player, false)
+                } else {
+                    tracing::warn!("logic_thread: get player requested, but player {player_id} with data doesn't exist");
+                    return;
+                }
+            };
 
             let mut player = player.borrow_mut();
-            state.worlds.insert(player_id, player.world.clone());
+            if is_player {
+                player
+                    .world
+                    .borrow_mut()
+                    .world_entitys
+                    .insert(player.basic_info.cur_map_id, WorldEntity::default());
+                state.worlds.insert(player_id, player.world.clone());
+            }
 
             player.init();
             player.set_session(session);
@@ -159,16 +175,12 @@ fn handle_logic_input(state: &mut LogicState, input: LogicInput) {
                 .borrow_mut()
                 .set_in_world_player_data(player.build_in_world_player());
 
-            world_util::add_player_entities(&mut player.world.borrow_mut(), &player);
-            let scene_info = world_util::build_scene_information(
-                &player.world.borrow(),
-                player.location.instance_id,
-                player.basic_info.id,
-            );
+            world_util::add_player_entities(&player);
+            let scene_info = world_util::build_scene_information(&player);
 
             player.notify(JoinSceneNotify {
-                max_entity_id: i64::MAX,
                 scene_info: Some(scene_info),
+                max_entity_id: i64::MAX,
                 transition_option: Some(TransitionOptionPb::default()),
             });
 

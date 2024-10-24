@@ -3,8 +3,8 @@ use shorekeeper_protocol::{GuideInfoRequest, GuideInfoResponse};
 use crate::logic::player::Player;
 
 pub fn on_guide_info_request(
-    player: &Player,
-    request: GuideInfoRequest,
+    _player: &Player,
+    _request: GuideInfoRequest,
     response: &mut GuideInfoResponse,
 ) {
     // TODO: Implement this

@@ -3,6 +3,7 @@ mod entity;
 mod guide;
 mod mail;
 mod misc;
+mod role;
 mod scene;
 mod skill;
 
@@ -11,6 +12,7 @@ pub use entity::*;
 pub use guide::*;
 pub use mail::*;
 pub use misc::*;
+pub use role::*;
 pub use scene::*;
 pub use skill::*;
 
@@ -88,6 +90,13 @@ macro_rules! handle_push {
 handle_request! {
     // Combat
     CombatSendPack, combat_message;
+
+    // Role
+    RoleShowListUpdate;
+    ClientCurrentRoleReport;
+    RoleFavorList;
+    FormationAttr;
+    UpdateFormation;
 
     // Entity
     EntityActive;

@@ -15,8 +15,9 @@ pub(super) struct MovementSystem;
 impl System for MovementSystem {
     fn tick(&self, world: &mut World, players: &mut [RefMut<Player>]) {
         let mut notify = MovePackageNotify::default();
+        let world_entity = world.get_world_entity();
 
-        for (entity, mut movement, mut position) in query_with!(world, Movement, Position) {
+        for (entity, mut movement, mut position) in query_with!(world_entity, Movement, Position) {
             if movement.pending_movement_vec.is_empty() {
                 continue;
             }
@@ -46,9 +47,12 @@ impl System for MovementSystem {
 
             notify.moving_entities.push(moving_entity_data);
 
-            if let (Some(_), Some(owner)) =
-                query_components!(world, i64::from(entity), PlayerEntityMarker, OwnerPlayer)
-            {
+            if let (Some(_), Some(owner)) = query_components!(
+                world_entity,
+                i64::from(entity),
+                PlayerEntityMarker,
+                OwnerPlayer
+            ) {
                 if let Some(player) = players.iter_mut().find(|pl| pl.basic_info.id == owner.0) {
                     player.location.position = position.0.clone();
                 }

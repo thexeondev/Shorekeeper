@@ -10,6 +10,8 @@ pub struct PlayerBasicInfo {
     pub exp: i32,
     pub head_photo: i32,
     pub head_frame: i32,
+    pub cur_map_id: i32,
+    pub role_show_list: Vec<i32>,
 }
 
 impl PlayerBasicInfo {
@@ -37,6 +39,8 @@ impl PlayerBasicInfo {
             exp: data.exp,
             head_photo: data.head_photo,
             head_frame: data.head_frame,
+            cur_map_id: data.cur_map_id,
+            role_show_list: data.role_show_list,
         }
     }
 
@@ -49,6 +53,8 @@ impl PlayerBasicInfo {
             exp: self.exp,
             head_photo: self.head_photo,
             head_frame: self.head_frame,
+            cur_map_id: self.cur_map_id,
+            role_show_list: self.role_show_list.clone(),
         }
     }
 }

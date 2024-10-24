@@ -1,8 +1,9 @@
 use std::collections::HashMap;
 
+use crate::logic::utils::load_role_info::load_key_value;
 use common::time_util;
 pub use formation::RoleFormation;
-use shorekeeper_data::role_info_data;
+use shorekeeper_data::{base_property_data, role_info_data};
 use shorekeeper_protocol::{ArrayIntInt, RoleData, RoleInfo};
 
 mod formation;
@@ -41,6 +42,12 @@ impl Role {
     }
 
     pub fn to_protobuf(&self) -> RoleInfo {
+        let base_prop: HashMap<i32, i32> = load_key_value(
+            base_property_data::iter()
+                .find(|d| d.id == self.role_id)
+                .unwrap(),
+        );
+
         RoleInfo {
             role_id: self.role_id,
             name: self.name.clone(),
@@ -55,23 +62,30 @@ impl Role {
                 .collect(),
             star: self.star,
             favor: self.favor,
+            base_prop: base_prop
+                .iter()
+                .map(|(&k, &v)| ArrayIntInt { key: k, value: v })
+                .collect(),
             ..Default::default()
         }
     }
 
-    pub fn load_from_save(data: RoleData) -> Self {
-        Self {
-            role_id: data.role_id,
-            name: data.name,
-            level: data.level,
-            exp: data.exp,
-            breakthrough: data.breakthrough,
-            skill_map: data.skill_map,
-            star: data.star,
-            favor: data.favor,
-            create_time: data.create_time,
-            equip_weapon: data.equip_weapon,
-        }
+    pub fn load_from_save(data: RoleData) -> (i32, Self) {
+        (
+            data.role_id,
+            Self {
+                role_id: data.role_id,
+                name: data.name,
+                level: data.level,
+                exp: data.exp,
+                breakthrough: data.breakthrough,
+                skill_map: data.skill_map,
+                star: data.star,
+                favor: data.favor,
+                create_time: data.create_time,
+                equip_weapon: data.equip_weapon,
+            },
+        )
     }
 
     pub fn build_save_data(&self) -> RoleData {
