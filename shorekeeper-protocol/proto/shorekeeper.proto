@@ -13819,12 +13819,12 @@ message LivenessInfo {
 }
 
 message LivenessTask {
-  int32 Id = 1;
-  int32 Current = 2;
-  int32 Target = 3;
+  int32 TaskId = 1;
+  int32 CurrentProgress = 2;
+  int32 TargetProgress = 3;
   bool IsFinished = 4;
   bool IsTaken = 5;
-  bool bxs = 6;
+  bool IsFunctionUnlock = 6;
 }
 
 // MessageId: 16908 (Request)
