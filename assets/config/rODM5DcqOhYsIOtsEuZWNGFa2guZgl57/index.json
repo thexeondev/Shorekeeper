@@ -1,0 +1,64 @@
+{
+    "default": {
+        "CdnUrl": [
+            {
+                "url": "https://cdn-huoshan-cn-mc.aki-game.com/prod/client/",
+                "weight": "2323"
+            },
+            {
+                "url": "https://cdn-qiniu-cn-mc.aki-game.com/prod/client/",
+                "weight": "0"
+            },
+            {
+                "url": "https://cdn-qcloud-cn-mc.aki-game.com/prod/client/",
+                "weight": "5443"
+            },
+            {
+                "url": "https://cdn-aliyun-cn-mc.aki-game.com/prod/client/",
+                "weight": "0"
+            }
+        ],
+        "SecondaryUrl": [],
+        "PriceRatio": 1,
+        "SpeedRatio": 1,
+        "GachaUrl": {
+            "GachaRecord": "http://127.0.0.1:10001/gacha/record",
+            "GachaPoolDetail": "http://127.0.0.1:10001/gacha/detail"
+        },
+        "LogReport": {
+            "name": "pioneer-upload-log-1319073642",
+            "region": "dev-reversedrooms"
+        },
+        "PackageUpdateDescUrl": {
+            "MainUrl": "http://127.0.0.1:10001/force_update/UpdateDesc.html",
+            "SubUrl": "http://127.0.0.1:10001/force_update/UpdateDesc.html"
+        },
+        "PackageUpdateUrl": {
+            "MainUrl": "http://127.0.0.1:10001/force_update/UpdateJs.html",
+            "SubUrl": "http://127.0.0.1:10001/force_update/UpdateJs.html"
+        },
+        "TDCfg": {
+            "AppID": "3e2e647670b7498fa645eb9574f78c2c",
+            "URL": "http://127.0.0.1:10001/TDCfg"
+        },
+        "GmOpen": false,
+        "IosAuditFirstDownloadTip": false,
+        "NoticeUrl": "http://127.0.0.1:10001/notice",
+        "MixUri": "rODM5DcqOhYsIOtsEuZWNGFa2guZgl57",
+        "ResUri": "rODM5DcqOhYsIOtsEuZWNGFa2guZgl57",
+        "LoginServers": [
+            {
+                "id": "f9e0fc655c1931bc03ad976e9fc14473",
+                "ip": "http://127.0.0.1:5500",
+                "name": "Shorekeeper"
+            }
+        ],
+        "PrivateServers": {
+            "enable": false,
+            "serverUrl": ""
+        }
+    },
+    "p1": {
+        "IosAuditFirstDownloadTip": false
+    }
+}

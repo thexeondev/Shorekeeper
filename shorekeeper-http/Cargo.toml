@@ -7,6 +7,7 @@ version.workspace = true
 # Framework
 axum.workspace = true
 axum-server.workspace = true
+tower-http.workspace = true
 
 # Cryptography
 aes.workspace = true

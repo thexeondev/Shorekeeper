@@ -1,9 +1,11 @@
-use axum::{handler::Handler, middleware::map_response_with_state, routing, Router};
-use config::{AesSettings, NetworkSettings};
-
+use axum::{handler::Handler, middleware::map_response_with_state, Router, routing};
 pub use axum::extract::{Path, Query, State};
 pub use axum::http::StatusCode;
 pub use axum::response::Json;
+use tower_http::services::ServeDir;
+use tower_http::trace::TraceLayer;
+
+use config::{AesSettings, NetworkSettings};
 
 pub mod config;
 mod encryption;
@@ -56,11 +58,21 @@ impl<S: Clone + Send + Sync + 'static> Application<S> {
         self
     }
 
+    pub fn serve_dir(mut self, path: &str, dir: &str) -> Self {
+        self.router = self.router.nest_service(path, ServeDir::new(dir));
+        self
+    }
+
     pub fn with_encryption(mut self, aes_settings: &'static AesSettings) -> Self {
         self.router = self.router.layer(map_response_with_state(
             aes_settings,
             encryption::encrypt_response,
         ));
+        self
+    }
+
+    pub fn with_logger(mut self) -> Self {
+        self.router = self.router.layer(TraceLayer::new_for_http());
         self
     }
 

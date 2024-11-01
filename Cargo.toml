@@ -8,6 +8,7 @@ version = "0.1.0"
 [workspace.dependencies]
 # Framework
 tokio = { version = "1.39.3", features = ["full"] }
+tower-http = { version = "0.6.1", features = ["fs", "trace"] }
 axum = "0.7.5"
 axum-server = "0.7.1"
 zeromq = { version = "0.4.0", default-features = false, features = ["tokio-runtime", "tcp-transport"] }
@@ -41,18 +42,18 @@ crc32fast = "1.4.2"
 
 # Tracing
 tracing = "0.1.40"
-tracing-subscriber = "0.3.18"
+tracing-subscriber = { version = "0.3.18", features = ["env-filter"] }
 
 # Internal
 kcp = { path = "gateway-server/kcp" }
-common = { path = "common/" }
-shorekeeper-http = { path = "shorekeeper-http/" }
-shorekeeper-data = { path = "shorekeeper-data/" }
-shorekeeper-database = { path = "shorekeeper-database/" }
-shorekeeper-network = { path = "shorekeeper-network/" }
-shorekeeper-protocol = { path = "shorekeeper-protocol/" }
+common = { path = "common" }
+shorekeeper-http = { path = "shorekeeper-http" }
+shorekeeper-data = { path = "shorekeeper-data" }
+shorekeeper-database = { path = "shorekeeper-database" }
+shorekeeper-network = { path = "shorekeeper-network" }
+shorekeeper-protocol = { path = "shorekeeper-protocol" }
 shorekeeper-protocol-derive = { path = "shorekeeper-protocol/shorekeeper-protocol-derive" }
-shorekeeper-protokey = { path = "shorekeeper-protokey/" }
+shorekeeper-protokey = { path = "shorekeeper-protokey" }
 
 [profile.release]
 strip = true      # Automatically strip symbols from the binary.

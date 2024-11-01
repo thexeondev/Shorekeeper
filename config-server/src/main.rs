@@ -1,4 +1,3 @@
-use std::fs;
 use std::sync::LazyLock;
 
 use anyhow::Result;
@@ -26,20 +25,14 @@ async fn main() -> Result<()> {
         LazyLock::new(|| config_util::load_or_create("configserver.toml"));
 
     ::common::splash::print_splash();
-    ::common::logging::init(::tracing::Level::DEBUG);
+    ::common::logging::init_axum(::tracing::Level::DEBUG);
 
     Application::new()
-        .get("/index.json", get_index)
+        .serve_dir("/", "assets/config")
         .with_encryption(&CONFIG.encryption)
+        .with_logger()
         .serve(&CONFIG.network)
         .await?;
 
     Ok(())
-}
-
-async fn get_index() -> &'static str {
-    static INDEX: LazyLock<String> =
-        LazyLock::new(|| fs::read_to_string("assets/config/index.json").unwrap());
-
-    &*INDEX
 }
