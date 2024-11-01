@@ -1,5 +1,4 @@
 use tracing::Level;
-use tracing_subscriber::fmt::writer::MakeWriterExt;
 use tracing_subscriber::layer::SubscriberExt;
 use tracing_subscriber::util::SubscriberInitExt;
 
@@ -17,16 +16,13 @@ pub fn init_axum(max_level: Level) {
                 // axum logs rejections from built-in extractors with the `axum::rejection`
                 // target, at `TRACE` level. `axum::rejection=trace` enables showing those events
                 format!(
-                    "{}=debug,tower_http=debug,axum::rejection=trace",
-                    env!("CARGO_CRATE_NAME")
-                )
-                    .into()
+                    "{}={},tower_http={},axum::rejection=trace",
+                    env!("CARGO_CRATE_NAME"),
+                    max_level.as_str(),
+                    max_level.as_str()
+                ).into()
             }),
         )
-        .with(
-            tracing_subscriber::fmt::layer()
-                .with_writer(std::io::stdout.with_max_level(max_level))
-                .with_target(false)
-        )
+        .with(tracing_subscriber::fmt::layer().with_target(false))
         .init();
 }
