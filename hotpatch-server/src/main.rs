@@ -26,11 +26,12 @@ async fn main() -> Result<()> {
         LazyLock::new(|| config_util::load_or_create("hotpatch.toml"));
 
     ::common::splash::print_splash();
-    ::common::logging::init(::tracing::Level::DEBUG);
+    ::common::logging::init_axum(::tracing::Level::DEBUG);
 
     Application::new()
         .get("/:env/client/:hash/:platform/config.json", get_config)
         .with_encryption(&CONFIG.encryption)
+        .with_logger()
         .serve(&CONFIG.network)
         .await?;
 

@@ -1,3 +1,3 @@
-CREATE DATABASE camellya_db;
-CREATE USER camellya_user WITH encrypted password 'camellya_pass';
-GRANT ALL PRIVILEGES ON DATABASE camellya_db to camellya_user;
+CREATE DATABASE wicked_waifus_db;
+CREATE USER wicked_waifus_user WITH encrypted password 'wicked_waifus_pass';
+GRANT ALL PRIVILEGES ON DATABASE wicked_waifus_db to wicked_waifus_user;

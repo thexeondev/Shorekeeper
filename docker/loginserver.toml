@@ -6,7 +6,7 @@ host = "host.docker.internal"
 port = 7777
 
 [database]
-host = "shorekeeper-postgres:5432"
-user_name = "shorekeeper_user"
-password = "shorekeeper_pass"
-db_name = "shorekeeper_db"
+host = "wicked-waifus-postgres:5432"
+user_name = "wicked_waifus_user"
+password = "wicked_waifus_pass"
+db_name = "wicked_waifus_db"

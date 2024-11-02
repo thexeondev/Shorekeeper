@@ -1,2 +1,2 @@
-\c camellya_db;
-GRANT ALL ON SCHEMA public TO camellya_user;
+\c wicked_waifus_db;
+GRANT ALL ON SCHEMA public TO wicked_waifus_user;

@@ -1,6 +1,7 @@
 use std::{process, sync::LazyLock};
 
 use anyhow::Result;
+
 use config::{GatewayConfig, ServerConfig};
 use shorekeeper_database::PgPool;
 use shorekeeper_http::{Application, StatusCode};
@@ -21,7 +22,7 @@ async fn main() -> Result<()> {
         LazyLock::new(|| ::common::config_util::load_or_create("loginserver.toml"));
 
     ::common::splash::print_splash();
-    ::common::logging::init(::tracing::Level::DEBUG);
+    ::common::logging::init_axum(::tracing::Level::DEBUG);
 
     let Ok(pool) = shorekeeper_database::connect_to(&CONFIG.database).await else {
         tracing::error!(
@@ -37,10 +38,11 @@ async fn main() -> Result<()> {
         pool,
         gateway: &CONFIG.gateway,
     })
-    .get("/health", || async { StatusCode::OK })
-    .get("/api/login", handler::handle_login_api_call)
-    .serve(&CONFIG.network)
-    .await?;
+        .get("/health", || async { StatusCode::OK })
+        .get("/api/login", handler::handle_login_api_call)
+        .with_logger()
+        .serve(&CONFIG.network)
+        .await?;
 
     Ok(())
 }

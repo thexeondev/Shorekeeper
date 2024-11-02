@@ -2,5 +2,5 @@ FROM alpine:3.20
 ARG MICROSERVICE
 
 WORKDIR /app
-COPY --from=camellya-builder:1.3.0-SNAPSHOT /app/target/release/$MICROSERVICE ./service
+COPY --from=wicked-waifus-builder:1.3.0-SNAPSHOT /app/target/release/$MICROSERVICE ./service
 CMD ["./service"]

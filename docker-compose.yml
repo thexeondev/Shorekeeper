@@ -1,29 +1,29 @@
-name: camellya-ps
+name: wicked-waifus-ps
 
 services:
-  camellya-config-server:
-    image: camellya-config-server:1.3.0-SNAPSHOT
+  wicked-waifus-config-server:
+    image: wicked-waifus-config-server:1.3.0-SNAPSHOT
     depends_on:
-      camellya-postgres:
+      wicked-waifus-postgres:
         condition: service_healthy
     ports:
       - '10001:10001'
     volumes:
       - "./docker/configserver.toml:/app/configserver.toml"
       - "./assets/config:/app/assets/config"
-  camellya-login-server:
-    image: camellya-login-server:1.3.0-SNAPSHOT
+  wicked-waifus-login-server:
+    image: wicked-waifus-login-server:1.3.0-SNAPSHOT
     depends_on:
-      camellya-postgres:
+      wicked-waifus-postgres:
         condition: service_healthy
     ports:
       - '5500:5500'
     volumes:
       - "./docker/loginserver.toml:/app/loginserver.toml"
-  camellya-gateway-server:
-    image: camellya-gateway-server:1.3.0-SNAPSHOT
+  wicked-waifus-gateway-server:
+    image: wicked-waifus-gateway-server:1.3.0-SNAPSHOT
     depends_on:
-      camellya-postgres:
+      wicked-waifus-postgres:
         condition: service_healthy
     ports:
       # Uncomment this if you want to have manual access
@@ -31,10 +31,10 @@ services:
       - '7777:7777/udp'
     volumes:
       - "./docker/gateway.toml:/app/gateway.toml"
-  camellya-game-server:
-    image: camellya-game-server:1.3.0-SNAPSHOT
+  wicked-waifus-game-server:
+    image: wicked-waifus-game-server:1.3.0-SNAPSHOT
     depends_on:
-      camellya-postgres:
+      wicked-waifus-postgres:
         condition: service_healthy
     # Uncomment this if you want to have manual access
 #    ports:
@@ -42,7 +42,7 @@ services:
     volumes:
       - "./docker/gameserver.toml:/app/gameserver.toml"
       - "./assets/logic:/app/assets/logic"
-  camellya-postgres:
+  wicked-waifus-postgres:
     image: postgres:16.4-alpine3.20
     user: postgres
     # Uncomment this if you want to have manual access
@@ -57,7 +57,7 @@ services:
       - "POSTGRES_PASSWORD=toor"
     volumes:
       - "./docker/postgres/scripts:/docker-entrypoint-initdb.d"
-      - camellya-postgres-vol:/var/lib/postgresql/data
+      - wicked-waifus-postgres-vol:/var/lib/postgresql/data
 volumes:
-  camellya-postgres-vol:
+  wicked-waifus-postgres-vol:
     external: true
