@@ -2895,7 +2895,7 @@ message CombatCommon {
 
 message EntityRemoveInfo {
   int64 EntityId = 1;
-  int32 Type = 2;
+  ERemoveEntityType Type = 2;
 }
 
 message RoleShowEntry {

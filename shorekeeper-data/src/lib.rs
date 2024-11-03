@@ -92,7 +92,6 @@ json_data! {
     InstanceDungeon;
     FunctionCondition;
     ExploreTools;
-    LordGym;
 }
 
 json_hash_table_data! {
