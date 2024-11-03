@@ -1,3 +1,4 @@
+use shorekeeper_data::RawVectorData;
 use shorekeeper_protocol::{Rotator, TransformData};
 
 use super::Vector3f;
@@ -44,6 +45,15 @@ impl Transform {
         TransformData {
             position: Some(self.position.save_data()),
             rotation: Some(self.rotation.save_data()),
+        }
+    }
+}
+
+impl From<&[RawVectorData]> for Transform {
+    fn from(transform: &[RawVectorData]) -> Self {
+        Self {
+            position: Vector3f::from(&transform[0]),
+            ..Default::default()
         }
     }
 }

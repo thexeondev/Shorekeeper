@@ -1,6 +1,6 @@
 use common::time_util;
 use shorekeeper_protocol::{
-    EEntityType, ERemoveEntityType, EntityAddNotify, EntityConfigType, EntityPb, EntityRemoveInfo,
+    EEntityType, EntityState, ERemoveEntityType, EntityAddNotify, EntityConfigType, EntityPb, EntityRemoveInfo,
     EntityRemoveNotify, FightFormationNotifyInfo, FightRoleInfo, FightRoleInfos, FormationRoleInfo,
     GroupFormation, ItemPkgOpenNotify, LivingStatus, PbGetRoleListNotify, PlayerBasicData,
     PlayerFightFormations, PlayerRoleData, PlayerSaveData, ProtocolUnit, UpdateFormationNotify,
@@ -55,6 +55,7 @@ pub struct Player {
     // Runtime
     pub world: Rc<RefCell<World>>,
     pub last_save_time: u64,
+    pub quadrant_id: u64,
 }
 
 impl Player {
@@ -312,6 +313,7 @@ impl Player {
                 .unwrap_or_default(),
             world: Rc::new(RefCell::new(World::new())),
             last_save_time: time_util::unix_timestamp(),
+            quadrant_id: 0,
         }
     }
 

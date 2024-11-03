@@ -32,6 +32,8 @@ impl_component_container! {
     Movement;
     Equip;
     VisionSkill;
+    MonsterAi;
+    Fsm;
 }
 
 pub trait Component {

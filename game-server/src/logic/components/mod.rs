@@ -7,6 +7,8 @@ mod player_entity_marker;
 mod position;
 mod visibility;
 mod vision_skill;
+mod monster_ai;
+mod fsm;
 
 pub use attribute::Attribute;
 pub use entity_config::EntityConfig;
@@ -17,3 +19,5 @@ pub use player_entity_marker::PlayerEntityMarker;
 pub use position::Position;
 pub use visibility::Visibility;
 pub use vision_skill::VisionSkill;
+pub use monster_ai::MonsterAi;
+pub use fsm::Fsm;

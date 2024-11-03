@@ -19,10 +19,7 @@ use std::{
 
 use super::{ecs::world::World, player::Player, utils::world_util};
 use crate::logic::ecs::world::WorldEntity;
-use crate::{
-    player_save_task::{self, PlayerSaveReason},
-    session::Session,
-};
+use crate::{logic, player_save_task::{self, PlayerSaveReason}, session::Session};
 
 const WATER_MASK: &str = include_str!("../../watermask-rr.js");
 const UID_FIX: &str = include_str!("../../uidfix.js");
@@ -200,6 +197,16 @@ fn handle_logic_input(state: &mut LogicState, input: LogicInput) {
                 content: CENSORSHIP_FIX.to_string(),
             });
 
+            let map = logic::utils::quadrant_util::get_map(player.location.instance_id);
+            let quadrant_id = map.get_quadrant_id(
+                player.location.position.position.x * 100.0,
+                player.location.position.position.y * 100.0,
+            );
+            player.quadrant_id = quadrant_id;
+
+            let entities = map.get_initial_entities(quadrant_id);
+            world_util::add_entities(&player, &entities);
+
             drop(player);
 
             state
@@ -224,6 +231,7 @@ fn handle_logic_input(state: &mut LogicState, input: LogicInput) {
 
             let _ = state.worlds.remove(&player_id);
             // TODO: kick co-op players from removed world
+            // TODO: Remove all entitie
 
             player_save_task::push(
                 player_id,

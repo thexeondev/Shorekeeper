@@ -1,3 +1,4 @@
+use shorekeeper_data::RawVectorData;
 use shorekeeper_protocol::{Vector, VectorData};
 
 #[derive(Default, Clone, PartialEq, Debug)]
@@ -37,6 +38,16 @@ impl Vector3f {
             x: data.get_x(),
             y: data.get_y(),
             z: data.get_z(),
+        }
+    }
+}
+
+impl From<&RawVectorData> for Vector3f {
+    fn from(transform: &RawVectorData) -> Self {
+        Self {
+            x: transform.x / 100.0,
+            y: transform.y / 100.0,
+            z: transform.z / 100.0,
         }
     }
 }
