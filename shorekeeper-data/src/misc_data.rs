@@ -26,6 +26,28 @@ impl VectorData {
     }
 }
 
+#[derive(Deserialize, Clone)]
+#[serde(rename_all = "PascalCase")]
+pub struct RawVectorData {
+    pub x: f32,
+    pub y: f32,
+    pub z: f32,
+}
+
+impl RawVectorData {
+    pub fn get_x(&self) -> f32 {
+        self.x
+    }
+
+    pub fn get_y(&self) -> f32 {
+        self.y
+    }
+
+    pub fn get_z(&self) -> f32 {
+        self.z
+    }
+}
+
 #[derive(Deserialize)]
 #[serde(rename_all = "PascalCase")]
 pub struct EntranceEntityData {
