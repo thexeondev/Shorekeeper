@@ -303,7 +303,6 @@ pub fn add_entities(player: &Player, entities: &[&LevelEntityConfigData]) {
 
         for entity in entities {
             // TODO: review other types
-            tracing::debug!("Entity to be added of type: {}", entity.blueprint_type);
             if entity.blueprint_type.contains("Monster") {
                 added_entities.push(build_monster_entity(
                     world,
@@ -311,6 +310,8 @@ pub fn add_entities(player: &Player, entities: &[&LevelEntityConfigData]) {
                     entity.map_id,
                     Transform::from(&entity.transform[..]),
                 ));
+            } else {
+                tracing::debug!("Unhandled entity to be added of type: {}", entity.blueprint_type);
             }
         }
     }
